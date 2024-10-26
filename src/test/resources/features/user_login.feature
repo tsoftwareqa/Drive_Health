@@ -11,7 +11,7 @@ Feature: Manage login and logout session for user
     When user clicks on logout option
     Then user should logout from application and navigate to login screen
     
-@SmokeTest
+@SmokeTest1
   Scenario: Validate user login with invalid credentials
     Given user is on Home page of application and login with invalid credentials
     When user verify error validation message

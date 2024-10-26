@@ -14,7 +14,7 @@ public class HomePage extends PageObject {
     public static Target PASSWORD = Target.the("password").locatedBy("//input[@id='password']");
     public static Target LOGIN_BTN = Target.the("submit").locatedBy("//button[contains(text(),'Login')]");
     public static Target DASHBOARD_LABEL = Target.the("Dashboard Label").locatedBy("//h2[@class='text-3xl font-bold']");
-    public static Target DOWN_ARROW = Target.the("Down Arrow Link").locatedBy("//div[@class='flex flex-col items-start']");
+    public static Target DOWN_ARROW = Target.the("Down Arrow Link").locatedBy("//div[@id='radix-:r6:']");
     public static Target LOGOUT = Target.the("Logout Link").locatedBy("//button[contains(text(),'Logout')]");
     public static Target VERIFY_LOGIN_LABEL = Target.the("Verify Login Label").locatedBy("//h1[@class='text-2xl font-bold']");
     public static Target INVALID_LOGIN_ERROR_MESSAGE = Target.the("Error message").locatedBy("//div[@class='text-sm font-semibold flex gap-3']");
