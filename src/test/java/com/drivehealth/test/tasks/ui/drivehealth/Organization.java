@@ -33,16 +33,13 @@ public class Organization extends UIInteractions implements Task {
 		actor.attemptsTo(Enter.keyValues(orgname).into(OrganizationPage.ORG_NAME));
 		actor.remember(Key.ORG_NAME, orgname);
 		waitABit(1000);
-		
+
 		actor.attemptsTo(Enter.keyValues("35201").into(OrganizationPage.ZIP_CODE));
 		waitABit(2000);
 				
 		actor.attemptsTo(Click.on(OrganizationPage.SAVE_BTN));
-		waitABit(1000);
-		
-		actor.attemptsTo(Enter.keyValues("35201").into(OrganizationPage.ZIP_CODE));
 		waitABit(2000);
-		
+				
 	}
 
 }
