@@ -104,10 +104,11 @@ public class DriveHealthSteps extends UIInteractionSteps{
 	
 	@Then("verify saved organization on grid")
 	public void verify_saved_organization_on_grid() {
-		givenThat(user).attemptsTo(Enter.keyValues(givenThat(user).recall(Key.ORG_NAME)).into(OrganizationPage.ORG_SEARCH_INPUT));
+		String org_name = givenThat(user).recall(Key.ORG_NAME);
+		givenThat(user).attemptsTo(Enter.keyValues(org_name).into(OrganizationPage.ORG_SEARCH_INPUT));
 		String searchResult = OrganizationPage.SEARCH_RESULT_HIGHLIGHTED.resolveFor(user).getText();
-		if (searchResult == givenThat(user).recall(Key.ORG_NAME)) {
-			givenThat(user).attemptsTo(Ensure.that(searchResult).isEqualToIgnoringCase(Key.ORG_NAME));		
+		if (searchResult.equalsIgnoreCase(org_name)) {
+			givenThat(user).attemptsTo(Ensure.that(searchResult).isEqualToIgnoringCase(org_name));		
 		} else {
 			givenThat(user).attemptsTo(Ensure.that(searchResult).isBlank());		
 		}
