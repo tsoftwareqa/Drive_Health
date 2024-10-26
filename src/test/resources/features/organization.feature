@@ -1,10 +1,10 @@
 Feature: Manage crud operations for organization and sub organization
 
-@SmokeTest
+@SmokeTest1
   Scenario: verify add organization and save
     Given user is on Home page of application and login
-    When click on organization button and fill details
-    Then save organization and verify
+    When click on organization button fill details and save
+    Then verify saved organization on grid 
    
 @SmokeTest
   Scenario: verify edit organization and save

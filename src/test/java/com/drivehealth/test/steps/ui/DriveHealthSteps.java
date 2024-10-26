@@ -4,8 +4,10 @@ import static net.serenitybdd.screenplay.GivenWhenThen.givenThat;
 import java.util.logging.Logger;
 
 import com.drivehealth.test.page_objects.HomePage;
+import com.drivehealth.test.page_objects.OrganizationPage;
 import com.drivehealth.test.questions.ui.ApplicationEnquiryResult;
 import com.drivehealth.test.tasks.ui.common.Login;
+import com.drivehealth.test.tasks.ui.drivehealth.Organization;
 import com.drivehealth.test.tasks.ui.drivehealth.UserRegister;
 import com.drivehealth.test.utils.CommonUtil;
 import com.drivehealth.test.utils.Key;
@@ -13,6 +15,7 @@ import com.drivehealth.test.utils.Key;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.core.di.SerenityInfrastructure;
 import net.serenitybdd.core.pages.ClearContents;
@@ -90,5 +93,23 @@ public class DriveHealthSteps extends UIInteractionSteps{
 	@When("verify user logged in successfully")
 	public void verify_user_logged_in_successfully() {
 		//givenThat(user).attemptsTo(Ensure.that(homepage.APP_LOGO).isDisplayed());
+	}
+	
+	//organization steps
+	
+	@When("click on organization button fill details and save")
+	public void click_on_organization_button_fill_details_and_save() {
+		givenThat(user).attemptsTo(Organization.fromUnderlineDetails());
+	}
+	
+	@Then("verify saved organization on grid")
+	public void verify_saved_organization_on_grid() {
+		givenThat(user).attemptsTo(Enter.keyValues(Key.ORG_NAME).into(OrganizationPage.ORG_SEARCH_INPUT));
+		String searchResult = OrganizationPage.SEARCH_RESULT_HIGHLIGHTED.resolveFor(user).getText();
+		if (searchResult == Key.ORG_NAME) {
+			givenThat(user).attemptsTo(Ensure.that(searchResult).isEqualToIgnoringCase(Key.ORG_NAME));		
+		} else {
+			givenThat(user).attemptsTo(Ensure.that(searchResult).isBlank());		
+		}
 	}
 }
