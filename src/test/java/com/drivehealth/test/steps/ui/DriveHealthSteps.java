@@ -110,8 +110,11 @@ public class DriveHealthSteps extends UIInteractionSteps{
 	public void verify_saved_organization_on_grid() {
 		String org_name = DataHelper.getRecord("Data", 1, 0);
 		givenThat(user).attemptsTo(Clear.field(OrganizationPage.ORG_SEARCH_INPUT));
+		waitABit(3000);
 		givenThat(user).attemptsTo(Enter.keyValues(org_name).into(OrganizationPage.ORG_SEARCH_INPUT));
+		waitABit(3000);
 		String searchResult = OrganizationPage.SEARCH_RESULT_HIGHLIGHTED.resolveFor(user).getText();
+		waitABit(3000);
 		if (searchResult.equalsIgnoreCase(org_name)) {
 			givenThat(user).attemptsTo(Ensure.that(searchResult).isEqualToIgnoringCase(org_name));		
 		} else if (searchResult.isBlank()) {

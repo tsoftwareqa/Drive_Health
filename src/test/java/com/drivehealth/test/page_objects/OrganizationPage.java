@@ -12,8 +12,8 @@ public class OrganizationPage extends PageObject{
 	public static Target ZIP_CODE = Target.the("zip code").locatedBy("//input[@id='zip_code']");
 	public static Target SAVE_BTN = Target.the("save btn").locatedBy("//button[contains(text(),'Save')]");
 	public static Target ORG_SEARCH_INPUT = Target.the("search input").locatedBy("//input[@placeholder='Search']");
-	public static Target SEARCH_RESULT_HIGHLIGHTED = Target.the("search result").locatedBy("//span[@class='_Highlighted_18z0f_1']/child::mark");
-	public static Target THREE_DOT_ICON = Target.the("Three dot icon").locatedBy("//button[@id='radix-:rg:']");
+	public static Target SEARCH_RESULT_HIGHLIGHTED = Target.the("search result").locatedBy("(//tr[@class='border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted'])[2]/child::td");
+	public static Target THREE_DOT_ICON = Target.the("Three dot icon").locatedBy("//button[@class='items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground flex h-8 w-8 p-0 data-[state=open]:bg-muted']");
 	public static Target EDIT = Target.the("EDIT").locatedBy("//Div[contains(text(),'Edit')]");
 	public static Target DELETE = Target.the("DELETE").locatedBy("//Div[contains(text(),'Delete')]");
 	public static Target DELETE_BTN = Target.the(" BTN").locatedBy("//button[contains(text(),'Delete')]");

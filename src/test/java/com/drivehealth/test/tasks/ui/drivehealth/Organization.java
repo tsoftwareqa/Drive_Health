@@ -65,7 +65,7 @@ public class Organization extends UIInteractions implements Task {
 			case "Edit":
 				waitABit(1000);
 				actor.attemptsTo(Enter.keyValues(DataHelper.getRecord("Data", 1, 0)).into(OrganizationPage.ORG_SEARCH_INPUT));
-				waitABit(2000);
+				waitABit(3000);
 				
 				actor.attemptsTo(Click.on(OrganizationPage.THREE_DOT_ICON));
 				waitABit(2000);
@@ -90,7 +90,7 @@ public class Organization extends UIInteractions implements Task {
 				
 				waitABit(1000);
 				actor.attemptsTo(Enter.keyValues(DataHelper.getRecord("Data", 1, 0)).into(OrganizationPage.ORG_SEARCH_INPUT));
-				waitABit(2000);
+				waitABit(3000);
 				
 				actor.attemptsTo(Click.on(OrganizationPage.THREE_DOT_ICON));
 				waitABit(2000);
