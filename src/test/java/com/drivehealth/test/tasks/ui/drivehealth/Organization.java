@@ -40,7 +40,7 @@ public class Organization extends UIInteractions implements Task {
 	@Override
 	public <T extends Actor> void performAs(T actor) {
 	
-		String orgname = "AUTO_ORG_"+OrganizationPage.generateRandomString();
+		String orgname="";
 		
 		switch(action){
 			case "Add":
@@ -49,6 +49,7 @@ public class Organization extends UIInteractions implements Task {
 				actor.attemptsTo(Click.on(OrganizationPage.ORG_BTN));
 				waitABit(2000);
 				
+				orgname = "AUTO_ORG_"+OrganizationPage.generateRandomString();
 				actor.attemptsTo(Enter.keyValues(orgname).into(OrganizationPage.ORG_NAME));
 				actor.remember(Key.ORG_NAME, orgname);
 				DataHelper.writeOrgInfo(orgname);
@@ -75,7 +76,10 @@ public class Organization extends UIInteractions implements Task {
 				actor.attemptsTo(Clear.field(OrganizationPage.ORG_NAME));
 				waitABit(2000);
 				
+				orgname = "AUTO_ORG_"+OrganizationPage.generateRandomString();
 				actor.attemptsTo(Enter.keyValues(orgname).into(OrganizationPage.ORG_NAME));
+				actor.remember(Key.ORG_NAME, orgname);
+				DataHelper.writeOrgInfo(orgname);
 				waitABit(2000);
 				
 				actor.attemptsTo(Click.on(OrganizationPage.SAVE_BTN));
@@ -92,10 +96,10 @@ public class Organization extends UIInteractions implements Task {
 				waitABit(2000);
 				
 				actor.attemptsTo(Click.on(OrganizationPage.DELETE));
-				waitABit(2000);
+				waitABit(3000);
 				
 				actor.attemptsTo(Click.on(OrganizationPage.DELETE_BTN));
-				waitABit(2000);
+				waitABit(3000);
 				
 				break;
 			default:

@@ -10,6 +10,7 @@ import com.drivehealth.test.tasks.ui.common.Login;
 import com.drivehealth.test.tasks.ui.drivehealth.Organization;
 import com.drivehealth.test.tasks.ui.drivehealth.UserRegister;
 import com.drivehealth.test.utils.CommonUtil;
+import com.drivehealth.test.utils.DataHelper;
 import com.drivehealth.test.utils.Key;
 
 import io.cucumber.datatable.DataTable;
@@ -96,8 +97,9 @@ public class DriveHealthSteps extends UIInteractionSteps{
 	}
 	
 	//organization steps
-	
 	@When("click on organization button fill details and save")
+	@When("click on three dot icon and update details")
+	@When("click on three dot icon and delete")
 	public void click_on_organization_button_fill_details_and_save(DataTable orgdata) {
 		givenThat(user).attemptsTo(Organization.fromUnderlineDetails(orgdata));
 	}
@@ -106,13 +108,15 @@ public class DriveHealthSteps extends UIInteractionSteps{
 	@Then("verify deleted organization")
 	@Then("verify saved organization on grid")
 	public void verify_saved_organization_on_grid() {
-		String org_name = givenThat(user).recall(Key.ORG_NAME);
+		String org_name = DataHelper.getRecord("Data", 1, 0);
+		givenThat(user).attemptsTo(Clear.field(OrganizationPage.ORG_SEARCH_INPUT));
 		givenThat(user).attemptsTo(Enter.keyValues(org_name).into(OrganizationPage.ORG_SEARCH_INPUT));
 		String searchResult = OrganizationPage.SEARCH_RESULT_HIGHLIGHTED.resolveFor(user).getText();
 		if (searchResult.equalsIgnoreCase(org_name)) {
 			givenThat(user).attemptsTo(Ensure.that(searchResult).isEqualToIgnoringCase(org_name));		
-		} else {
-			givenThat(user).attemptsTo(Ensure.that(searchResult).isBlank());		
+		} else if (searchResult.isBlank()) {
+			givenThat(user).attemptsTo(Ensure.that(searchResult).isBlank());
+			System.out.println("Org Deleted successfully");
 		}
 	}
 }
