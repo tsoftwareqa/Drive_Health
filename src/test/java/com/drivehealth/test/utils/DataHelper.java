@@ -44,7 +44,7 @@ public class DataHelper {
 	static File destFile;
 
 	static {
-		srcFile = new File(System.getProperty("user.dir") + "/src/test/resources/sources/RPMTestData.xlsx");
+		srcFile = new File(System.getProperty("user.dir") + "/src/test/resources/sources/DriveHealthTestData.xlsx");
 		try {
 			fileInputStream = new FileInputStream(srcFile);
 			try {
@@ -58,10 +58,10 @@ public class DataHelper {
 		}
 	}
 
-	public static void writeUserInfo(String username) {
-		sheet = workbook.getSheet("Account");
+	public static void writeOrgInfo(String orgname) {
+		sheet = workbook.getSheet("Data");
 			XSSFRow row = sheet.createRow((short) 1);
-			row.createCell(0).setCellValue(username);		
+			row.createCell(0).setCellValue(orgname);		
 		try {
 			fileOutputStream = new FileOutputStream(srcFile);
 		} catch (FileNotFoundException e) {

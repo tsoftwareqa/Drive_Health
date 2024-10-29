@@ -98,8 +98,8 @@ public class DriveHealthSteps extends UIInteractionSteps{
 	//organization steps
 	
 	@When("click on organization button fill details and save")
-	public void click_on_organization_button_fill_details_and_save() {
-		givenThat(user).attemptsTo(Organization.fromUnderlineDetails());
+	public void click_on_organization_button_fill_details_and_save(DataTable orgdata) {
+		givenThat(user).attemptsTo(Organization.fromUnderlineDetails(orgdata));
 	}
 	
 	@Then("verify saved organization on grid")

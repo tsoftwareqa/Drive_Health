@@ -1,5 +1,7 @@
 package com.drivehealth.test.page_objects;
 
+import java.util.Random;
+
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.screenplay.targets.Target;
 
@@ -19,7 +21,24 @@ public class OrganizationPage extends PageObject{
 
 	}
 	
-	public static void main(String args[]) {
-		System.out.println(OrganizationPage.rndChar());
-	}
+    public static String generateRandomString(){
+
+        final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        
+        // Initializing the random variable
+        Random random = new Random();
+
+        StringBuilder sb = new StringBuilder();
+        
+        // Generating Random String using loop
+        for (int i = 0; i < 5; i++) {
+            sb.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length())));
+        }
+        return sb.toString();
+    }
+	
+	/*
+	 * public static void main(String args[]) {
+	 * System.out.println(OrganizationPage.generateRandomString()); }
+	 */
 }
