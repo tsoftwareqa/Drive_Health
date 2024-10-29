@@ -102,6 +102,8 @@ public class DriveHealthSteps extends UIInteractionSteps{
 		givenThat(user).attemptsTo(Organization.fromUnderlineDetails(orgdata));
 	}
 	
+	@Then("update organization and verify")
+	@Then("verify deleted organization")
 	@Then("verify saved organization on grid")
 	public void verify_saved_organization_on_grid() {
 		String org_name = givenThat(user).recall(Key.ORG_NAME);

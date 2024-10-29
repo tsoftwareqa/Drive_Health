@@ -14,7 +14,7 @@ Feature: Manage crud operations for organization and sub organization
     When click on three dot icon and change details
         | Action |
         | Edit   |
-    Then save organization and verify
+    Then update organization and verify
     
 @SmokeTest
   Scenario: delete organization and verify
