@@ -1,8 +1,11 @@
 package com.drivehealth.test.tasks.ui.drivehealth;
 
+import java.util.List;
 import java.util.Map;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 
 import com.drivehealth.test.page_objects.HomePage;
 import com.drivehealth.test.page_objects.OrganizationPage;
@@ -25,6 +28,7 @@ import net.serenitybdd.screenplay.actions.Switch;
 public class Organization extends UIInteractions implements Task {
 
 	private static String action;
+	OrganizationPage orgpage;
 	
 	public Organization(String action) {
 		this.action = action;
@@ -52,7 +56,7 @@ public class Organization extends UIInteractions implements Task {
 				orgname = "AUTO_ORG_"+OrganizationPage.generateRandomString();
 				actor.attemptsTo(Enter.keyValues(orgname).into(OrganizationPage.ORG_NAME));
 				actor.remember(Key.ORG_NAME, orgname);
-				DataHelper.writeOrgInfo(orgname);
+				DataHelper.writeOrgInfo(orgname,0);
 				waitABit(1000);
 
 				actor.attemptsTo(Enter.keyValues("35201").into(OrganizationPage.ZIP_CODE));
@@ -79,7 +83,7 @@ public class Organization extends UIInteractions implements Task {
 				orgname = "AUTO_ORG_"+OrganizationPage.generateRandomString();
 				actor.attemptsTo(Enter.keyValues(orgname).into(OrganizationPage.ORG_NAME));
 				actor.remember(Key.ORG_NAME, orgname);
-				DataHelper.writeOrgInfo(orgname);
+				DataHelper.writeOrgInfo(orgname,1);
 				waitABit(2000);
 				
 				actor.attemptsTo(Click.on(OrganizationPage.SAVE_BTN));
@@ -102,6 +106,29 @@ public class Organization extends UIInteractions implements Task {
 				waitABit(3000);
 				
 				break;
+				
+			case "AddSub":
+				waitABit(1000);
+			    orgpage.getElement();
+			    
+			    waitABit(2000);
+			    actor.attemptsTo(Click.on(OrganizationPage.SUB_ORG_BTN));
+			    
+				waitABit(2000);
+				orgname = "AUTO_SUB_ORG_"+OrganizationPage.generateRandomString();
+				actor.attemptsTo(Enter.keyValues(orgname).into(OrganizationPage.ORG_NAME));
+				
+				actor.remember(Key.SUB_ORG_NAME, orgname);
+				DataHelper.writeOrgInfo(orgname,1);
+				waitABit(1000);
+
+				actor.attemptsTo(Enter.keyValues("34997").into(OrganizationPage.ZIP_CODE));
+				waitABit(2000);
+						
+				actor.attemptsTo(Click.on(OrganizationPage.SAVE_BTN));
+				waitABit(2000);
+				break;
+				
 			default:
 				System.out.println("No action");
 				break;

@@ -97,6 +97,7 @@ public class DriveHealthSteps extends UIInteractionSteps{
 	}
 	
 	//organization steps
+	@When("click on sub organization button and fill details and save")
 	@When("click on organization button fill details and save")
 	@When("click on three dot icon and update details")
 	@When("click on three dot icon and delete")
@@ -104,11 +105,29 @@ public class DriveHealthSteps extends UIInteractionSteps{
 		givenThat(user).attemptsTo(Organization.fromUnderlineDetails(orgdata));
 	}
 	
+	@Then("input org name in search input field and verify searched result")
 	@Then("update organization and verify")
 	@Then("verify deleted organization")
 	@Then("verify saved organization on grid")
 	public void verify_saved_organization_on_grid() {
 		String org_name = DataHelper.getRecord("Data", 1, 0);
+		givenThat(user).attemptsTo(Clear.field(OrganizationPage.ORG_SEARCH_INPUT));
+		waitABit(3000);
+		givenThat(user).attemptsTo(Enter.keyValues(org_name).into(OrganizationPage.ORG_SEARCH_INPUT));
+		waitABit(3000);
+		String searchResult = OrganizationPage.SEARCH_RESULT_HIGHLIGHTED.resolveFor(user).getText();
+		waitABit(3000);
+		if (searchResult.equalsIgnoreCase(org_name)) {
+			givenThat(user).attemptsTo(Ensure.that(searchResult).isEqualToIgnoringCase(org_name));		
+		} else if (searchResult.isBlank()) {
+			givenThat(user).attemptsTo(Ensure.that(searchResult).isBlank());
+			System.out.println("Org Deleted successfully");
+		}
+	}
+	
+	@Then("verify sub organization")
+	public void verify_sub_organization() {
+		String org_name = DataHelper.getRecord("Data", 1, 1);
 		givenThat(user).attemptsTo(Clear.field(OrganizationPage.ORG_SEARCH_INPUT));
 		waitABit(3000);
 		givenThat(user).attemptsTo(Enter.keyValues(org_name).into(OrganizationPage.ORG_SEARCH_INPUT));

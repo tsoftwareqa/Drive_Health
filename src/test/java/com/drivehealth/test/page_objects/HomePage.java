@@ -4,6 +4,9 @@ import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.targets.Target;
+
+import java.util.List;
+
 import net.serenitybdd.annotations.DefaultUrl;
 
 @DefaultUrl("page:home.page")
@@ -42,9 +45,4 @@ public class HomePage extends PageObject {
         return DASHBOARD_LABEL.isVisibleFor(actor);
     }
     
-	/*
-	 * 
-	 * public List<String> getAscaMenu() { return findAll(ASCA_MENU).stream()
-	 * .map(WebElementFacade::getText) .collect(Collectors.toList()); }
-	 */
 }

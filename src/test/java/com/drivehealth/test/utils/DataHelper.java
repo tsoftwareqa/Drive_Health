@@ -58,10 +58,10 @@ public class DataHelper {
 		}
 	}
 
-	public static void writeOrgInfo(String orgname) {
+	public static void writeOrgInfo(String orgname,int cell) {
 		sheet = workbook.getSheet("Data");
 			XSSFRow row = sheet.createRow((short) 1);
-			row.createCell(0).setCellValue(orgname);		
+			row.createCell(cell).setCellValue(orgname);		
 		try {
 			fileOutputStream = new FileOutputStream(srcFile);
 		} catch (FileNotFoundException e) {
