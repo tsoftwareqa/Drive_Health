@@ -55,6 +55,7 @@ public class Organization extends UIInteractions implements Task {
 				
 				orgname = "AUTO_ORG_"+OrganizationPage.generateRandomString();
 				actor.attemptsTo(Enter.keyValues(orgname).into(OrganizationPage.ORG_NAME));
+				
 				actor.remember(Key.ORG_NAME, orgname);
 				DataHelper.writeOrgInfo(orgname,0);
 				waitABit(1000);
@@ -115,11 +116,11 @@ public class Organization extends UIInteractions implements Task {
 			    actor.attemptsTo(Click.on(OrganizationPage.SUB_ORG_BTN));
 			    
 				waitABit(2000);
-				orgname = "AUTO_SUB_ORG_"+OrganizationPage.generateRandomString();
-				actor.attemptsTo(Enter.keyValues(orgname).into(OrganizationPage.ORG_NAME));
+				String org_name = "AUTO_SUB_ORG_"+OrganizationPage.generateRandomString();
+				actor.attemptsTo(Enter.keyValues(org_name).into(OrganizationPage.ORG_NAME));
 				
-				actor.remember(Key.SUB_ORG_NAME, orgname);
-				DataHelper.writeOrgInfo(orgname,1);
+				actor.remember(Key.SUB_ORG_NAME, org_name);
+				DataHelper.writeSubOrgInfo(org_name,0);
 				waitABit(1000);
 
 				actor.attemptsTo(Enter.keyValues("34997").into(OrganizationPage.ZIP_CODE));

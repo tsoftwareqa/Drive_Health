@@ -59,7 +59,26 @@ public class DataHelper {
 	}
 
 	public static void writeOrgInfo(String orgname,int cell) {
-		sheet = workbook.getSheet("Data");
+		sheet = workbook.getSheet("OrgData");
+			XSSFRow row = sheet.createRow((short) 1);
+			row.createCell(cell).setCellValue(orgname);		
+		try {
+			fileOutputStream = new FileOutputStream(srcFile);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		try {
+			workbook.write(fileOutputStream);
+			fileOutputStream.flush();
+			fileOutputStream.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		logger.info("Excel file has been generated successfully");
+	}
+	
+	public static void writeSubOrgInfo(String orgname,int cell) {
+		sheet = workbook.getSheet("SubOrgData");
 			XSSFRow row = sheet.createRow((short) 1);
 			row.createCell(cell).setCellValue(orgname);		
 		try {
