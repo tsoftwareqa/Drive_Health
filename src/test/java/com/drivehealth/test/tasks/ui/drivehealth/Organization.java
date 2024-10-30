@@ -83,8 +83,9 @@ public class Organization extends UIInteractions implements Task {
 				
 				orgname = "AUTO_ORG_"+OrganizationPage.generateRandomString();
 				actor.attemptsTo(Enter.keyValues(orgname).into(OrganizationPage.ORG_NAME));
+				
 				actor.remember(Key.ORG_NAME, orgname);
-				DataHelper.writeOrgInfo(orgname,1);
+				DataHelper.writeOrgInfo(orgname,0);
 				waitABit(2000);
 				
 				actor.attemptsTo(Click.on(OrganizationPage.SAVE_BTN));
