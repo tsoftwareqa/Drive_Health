@@ -82,7 +82,8 @@ public class DriveHealthSteps extends UIInteractionSteps{
 	@When("click on sub organization button and fill details and save")
 	@When("click on organization button fill details and save")
 	@When("click on three dot icon and update details")
-	@When("click on three dot icon and delete")
+	@When("click on three dot icon and delete org")
+	@When("click on three dot icon and delete sub org")
 	@When("click on three dot icon and change sub org details")
 	public void click_on_organization_button_fill_details_and_save(DataTable orgdata) {
 		givenThat(user).attemptsTo(Organization.fromUnderlineDetails(orgdata));
@@ -110,6 +111,7 @@ public class DriveHealthSteps extends UIInteractionSteps{
 	
 	@Then("verify added sub organization")
 	@Then("verify updated sub organization")
+	@Then("verify deleted sub organization")
 	public void verify_added_sub_organization() {
 		waitABit(2000);
 		givenThat(user).attemptsTo(Click.on(OrganizationPage.SHOW_SUB_ORG_CHKBOX));

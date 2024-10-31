@@ -95,7 +95,7 @@ public class Organization extends UIInteractions implements Task {
 			case "Delete":
 				
 				waitABit(1000);
-				actor.attemptsTo(Enter.keyValues(DataHelper.getRecord("Data", 1, 0)).into(OrganizationPage.ORG_SEARCH_INPUT));
+				actor.attemptsTo(Enter.keyValues(DataHelper.getRecord("OrgData", 1, 0)).into(OrganizationPage.ORG_SEARCH_INPUT));
 				waitABit(3000);
 				
 				actor.attemptsTo(Click.on(OrganizationPage.THREE_DOT_ICON));
@@ -159,6 +159,25 @@ public class Organization extends UIInteractions implements Task {
 				waitABit(2000);
 				break;
 				
+            case "DeleteSub":
+
+				waitABit(1000);
+				actor.attemptsTo(Click.on(OrganizationPage.SHOW_SUB_ORG_CHKBOX));
+				waitABit(2000);
+				
+				actor.attemptsTo(Enter.keyValues(DataHelper.getRecord("SubOrgData", 1, 0)).into(OrganizationPage.ORG_SEARCH_INPUT));
+				waitABit(3000);
+				
+				actor.attemptsTo(Click.on(OrganizationPage.THREE_DOT_ICON));
+				waitABit(2000);
+				
+				actor.attemptsTo(Click.on(OrganizationPage.DELETE));
+				waitABit(3000);
+				
+				actor.attemptsTo(Click.on(OrganizationPage.DELETE_BTN));
+				waitABit(3000);
+				
+				break;
 			default:
 				System.out.println("No action");
 				break;

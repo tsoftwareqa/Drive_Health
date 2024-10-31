@@ -29,7 +29,7 @@ Feature: Manage crud operations for organization and sub organization
         | AddSub |
     Then verify sub organization
    
-@SmokeTest1
+@SmokeTest
   Scenario: verify edit sub organization and save
     Given user is on Home page of application and login
     When click on three dot icon and change sub org details
@@ -37,18 +37,18 @@ Feature: Manage crud operations for organization and sub organization
         | EditSub |
     Then verify updated sub organization
     
-@SmokeTest
+@SmokeTest1
   Scenario: delete sub organization and verify
     Given user is on Home page of application and login
-    When click on three dot icon and delete
-        | Action |
-        | Delete |
+    When click on three dot icon and delete sub org
+        | Action    |
+        | DeleteSub |
     Then verify deleted sub organization
     
 @SmokeTest
   Scenario: delete organization and verify
     Given user is on Home page of application and login
-    When click on three dot icon and delete
+    When click on three dot icon and delete org
         | Action |
         | Delete |
     Then verify deleted organization
