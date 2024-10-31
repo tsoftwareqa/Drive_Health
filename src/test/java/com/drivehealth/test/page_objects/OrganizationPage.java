@@ -29,7 +29,9 @@ public class OrganizationPage extends PageObject {
 	public static Target DELETE_BTN = Target.the(" BTN").locatedBy("//button[contains(text(),'Delete')]");
 	public static Target ALL_ORG = Target.the(" all org").locatedBy("//div[@data-state='closed']/child::button");
 	public static Target SUB_ORG_BTN = Target.the("sub org btn").locatedBy("//button[contains(text(),'Sub-Organization')]");
+	public static Target SHOW_SUB_ORG_CHKBOX = Target.the("checkbox").locatedBy("//button[@id='include-option']");
 
+	
 	public static char rndChar() {
 		int rnd = (int) (Math.random() * 52); // or use Random or whatever
 		char base = (rnd < 26) ? 'A' : 'a';

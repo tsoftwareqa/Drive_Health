@@ -69,7 +69,7 @@ public class Organization extends UIInteractions implements Task {
 				
 			case "Edit":
 				waitABit(1000);
-				actor.attemptsTo(Enter.keyValues(DataHelper.getRecord("Data", 1, 0)).into(OrganizationPage.ORG_SEARCH_INPUT));
+				actor.attemptsTo(Enter.keyValues(DataHelper.getRecord("OrgData", 1, 0)).into(OrganizationPage.ORG_SEARCH_INPUT));
 				waitABit(3000);
 				
 				actor.attemptsTo(Click.on(OrganizationPage.THREE_DOT_ICON));
@@ -131,12 +131,37 @@ public class Organization extends UIInteractions implements Task {
 				waitABit(2000);
 				break;
 				
+			case "EditSub":
+				waitABit(1000);
+				actor.attemptsTo(Click.on(OrganizationPage.SHOW_SUB_ORG_CHKBOX));
+				waitABit(2000);
+				
+				actor.attemptsTo(Enter.keyValues(DataHelper.getRecord("SubOrgData", 1, 0)).into(OrganizationPage.ORG_SEARCH_INPUT));
+				waitABit(3000);
+				
+				actor.attemptsTo(Click.on(OrganizationPage.THREE_DOT_ICON));
+				waitABit(2000);
+				
+				actor.attemptsTo(Click.on(OrganizationPage.EDIT));
+				waitABit(2000);
+				
+				actor.attemptsTo(Clear.field(OrganizationPage.ORG_NAME));
+				waitABit(2000);
+				
+				orgname = "AUTO_ORG_"+OrganizationPage.generateRandomString();
+				actor.attemptsTo(Enter.keyValues(orgname).into(OrganizationPage.ORG_NAME));
+				
+				actor.remember(Key.ORG_NAME, orgname);
+				DataHelper.writeSubOrgInfo(orgname,0);
+				waitABit(2000);
+				
+				actor.attemptsTo(Click.on(OrganizationPage.SAVE_BTN));
+				waitABit(2000);
+				break;
+				
 			default:
 				System.out.println("No action");
 				break;
-		}
-		
-				
-	}
-	
+		}				
+	}	
 }

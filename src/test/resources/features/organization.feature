@@ -1,6 +1,6 @@
 Feature: Manage crud operations for organization and sub organization
 
-@SmokeTest1
+@SmokeTest
   Scenario: verify add organization and save
     Given user is on Home page of application and login
     When click on organization button fill details and save
@@ -21,7 +21,7 @@ Feature: Manage crud operations for organization and sub organization
         | Edit   |
     Then update organization and verify
        
-@SmokeTest1
+@SmokeTest
   Scenario: verify add sub organization and save
     Given user is on Home page of application and login
     When click on sub organization button and fill details and save
@@ -29,13 +29,13 @@ Feature: Manage crud operations for organization and sub organization
         | AddSub |
     Then verify sub organization
    
-@SmokeTest
+@SmokeTest1
   Scenario: verify edit sub organization and save
     Given user is on Home page of application and login
-    When click on three dot icon and change details
+    When click on three dot icon and change sub org details
         | Action  |
         | EditSub |
-    Then save sub organization and verify
+    Then verify updated sub organization
     
 @SmokeTest
   Scenario: delete sub organization and verify

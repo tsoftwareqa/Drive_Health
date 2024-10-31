@@ -83,6 +83,7 @@ public class DriveHealthSteps extends UIInteractionSteps{
 	@When("click on organization button fill details and save")
 	@When("click on three dot icon and update details")
 	@When("click on three dot icon and delete")
+	@When("click on three dot icon and change sub org details")
 	public void click_on_organization_button_fill_details_and_save(DataTable orgdata) {
 		givenThat(user).attemptsTo(Organization.fromUnderlineDetails(orgdata));
 	}
@@ -107,11 +108,17 @@ public class DriveHealthSteps extends UIInteractionSteps{
 		}
 	}
 	
-	@Then("verify sub organization")
-	public void verify_sub_organization() {
-		String org_name = DataHelper.getRecord("SubOrgData", 1, 0);
+	@Then("verify added sub organization")
+	@Then("verify updated sub organization")
+	public void verify_added_sub_organization() {
+		waitABit(2000);
+		givenThat(user).attemptsTo(Click.on(OrganizationPage.SHOW_SUB_ORG_CHKBOX));
+		waitABit(2000);
+		givenThat(user).attemptsTo(Click.on(OrganizationPage.SHOW_SUB_ORG_CHKBOX));
+		waitABit(2000);
 		givenThat(user).attemptsTo(Clear.field(OrganizationPage.ORG_SEARCH_INPUT));
 		waitABit(3000);
+		String org_name = DataHelper.getRecord("SubOrgData", 1, 0);
 		givenThat(user).attemptsTo(Enter.keyValues(org_name).into(OrganizationPage.ORG_SEARCH_INPUT));
 		waitABit(3000);
 		String searchResult = OrganizationPage.SEARCH_RESULT_HIGHLIGHTED.resolveFor(user).getText();
