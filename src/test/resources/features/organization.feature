@@ -36,8 +36,32 @@ Feature: Manage crud operations for organization and sub organization
         | Action  |
         | EditSub |
     Then verify updated sub organization
-    
-@SmokeTest1
+
+@SmokeTest
+  Scenario: verify add member and save
+    Given user is on Home page of application and login
+    When click on add member button fill details and save
+        | Action |
+        | Add    |
+    Then verify added member in organization
+
+@SmokeTest
+  Scenario: verify edit member and save
+    Given user is on Home page of application and login
+    When click on three dot icon and change member details
+        | Action |
+        | Edit   |
+    Then verify updated member in organization
+     
+@SmokeTest
+  Scenario: delete member and verify
+    Given user is on Home page of application and login
+    When click on three dot icon and delete member
+        | Action |
+        | Delete |
+    Then verify deleted member
+     
+@SmokeTest
   Scenario: delete sub organization and verify
     Given user is on Home page of application and login
     When click on three dot icon and delete sub org

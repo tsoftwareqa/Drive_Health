@@ -95,6 +95,25 @@ public class DataHelper {
 		}
 		logger.info("Excel file has been generated successfully");
 	}
+	
+	public static void writeMemberInfo(String membername,int cell) {
+		sheet = workbook.getSheet("MemberData");
+			XSSFRow row = sheet.createRow((short) 1);
+			row.createCell(cell).setCellValue(membername);		
+		try {
+			fileOutputStream = new FileOutputStream(srcFile);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		try {
+			workbook.write(fileOutputStream);
+			fileOutputStream.flush();
+			fileOutputStream.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		logger.info("Excel file has been generated successfully");
+	}
 		
 	public static String getRecord(String sheetname, int row, int col) {
 		DataFormatter formatter = new DataFormatter();

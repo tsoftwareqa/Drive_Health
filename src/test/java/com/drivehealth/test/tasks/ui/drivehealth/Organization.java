@@ -1,20 +1,10 @@
 package com.drivehealth.test.tasks.ui.drivehealth;
-
-import java.util.List;
 import java.util.Map;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-
-import com.drivehealth.test.page_objects.HomePage;
 import com.drivehealth.test.page_objects.OrganizationPage;
-import com.drivehealth.test.tasks.ui.common.NavigateTo;
-import com.drivehealth.test.utils.CommonUtil;
 import com.drivehealth.test.utils.ConvertCucumberDataTable;
 import com.drivehealth.test.utils.DataHelper;
 import com.drivehealth.test.utils.Key;
-
 import io.cucumber.datatable.DataTable;
 import net.serenitybdd.core.steps.UIInteractions;
 import net.serenitybdd.screenplay.Actor;
@@ -22,8 +12,6 @@ import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Clear;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
-import net.serenitybdd.screenplay.actions.Scroll;
-import net.serenitybdd.screenplay.actions.Switch;
 
 public class Organization extends UIInteractions implements Task {
 
