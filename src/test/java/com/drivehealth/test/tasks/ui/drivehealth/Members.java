@@ -1,12 +1,14 @@
 package com.drivehealth.test.tasks.ui.drivehealth;
 
 import java.util.Map;
+
+import org.openqa.selenium.Keys;
+
 import com.drivehealth.test.page_objects.MembersObject;
 import com.drivehealth.test.page_objects.OrganizationPage;
 import com.drivehealth.test.utils.CommonUtil;
 import com.drivehealth.test.utils.ConvertCucumberDataTable;
 import com.drivehealth.test.utils.DataHelper;
-import com.drivehealth.test.utils.Key;
 import io.cucumber.datatable.DataTable;
 import net.serenitybdd.core.steps.UIInteractions;
 import net.serenitybdd.screenplay.Actor;
@@ -14,6 +16,9 @@ import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Clear;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import net.serenitybdd.screenplay.actions.SelectFromOptions;
+import net.serenitybdd.screenplay.ui.Dropdown;
+import net.serenitybdd.screenplay.ui.Select;
 
 public class Members extends UIInteractions implements Task {
 
@@ -57,20 +62,17 @@ public class Members extends UIInteractions implements Task {
 			
 			waitABit(2000);
 			String email = "tests"+CommonUtil.generateRandomNumber()+"@gmail.com";
-			actor.attemptsTo(Enter.keyValues(email).into(MembersObject.FIRST_NAME));
+			actor.attemptsTo(Enter.keyValues(email).into(MembersObject.EMAIL));
 			
 			waitABit(2000);
 			actor.attemptsTo(Enter.keyValues("11/11/1998").into(MembersObject.DOB));
 			
 			waitABit(2000);
-			actor.attemptsTo(Click.on(MembersObject.GENDER));
-			
-			waitABit(2000);
-			actor.attemptsTo(Click.on(MembersObject.MALE));
-			
-			waitABit(2000);
 			String phone = "0"+CommonUtil.generateNineDigitNumber();
 			actor.attemptsTo(Enter.keyValues(phone).into(MembersObject.PHONE));
+			
+			waitABit(2000);
+			actor.attemptsTo(SelectFromOptions.byIndex(1).from(MembersObject.GENDER));
 			
 			waitABit(2000);
 			actor.attemptsTo(Enter.keyValues("351 24TH ST UNIT 20224").into(MembersObject.ADDRESS));
@@ -79,7 +81,7 @@ public class Members extends UIInteractions implements Task {
 			actor.attemptsTo(Enter.keyValues("35201").into(MembersObject.ZIP));
 
 			waitABit(2000);
-			DataHelper.writeSubOrgInfo(firstname,0);
+			DataHelper.writeMemberInfo(firstname,0);
 			waitABit(1000);
 				
 			actor.attemptsTo(Click.on(MembersObject.SAVE_SEND_INVITE));

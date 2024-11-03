@@ -27,7 +27,7 @@ public class MembersObject extends PageObject {
 	
 	public static Target MALE = Target.the("male").locatedBy("//span[@id='radix-:rgv:']");
 
-	public static Target GENDER = Target.the("gender").locatedBy("//button[@role='combobox']");
+	public static Target GENDER = Target.the("gender").locatedBy("//select[@name='gender']");
 
 	public static Target PHONE = Target.the("phone").locatedBy("//input[@id='phone']");
 

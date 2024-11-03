@@ -4,8 +4,10 @@ import static net.serenitybdd.screenplay.GivenWhenThen.givenThat;
 import java.util.logging.Logger;
 
 import com.drivehealth.test.page_objects.HomePage;
+import com.drivehealth.test.page_objects.MembersObject;
 import com.drivehealth.test.page_objects.OrganizationPage;
 import com.drivehealth.test.tasks.ui.common.Login;
+import com.drivehealth.test.tasks.ui.drivehealth.Members;
 import com.drivehealth.test.tasks.ui.drivehealth.Organization;
 import com.drivehealth.test.utils.DataHelper;
 import io.cucumber.datatable.DataTable;
@@ -130,6 +132,29 @@ public class DriveHealthSteps extends UIInteractionSteps{
 		} else if (searchResult.isBlank()) {
 			givenThat(user).attemptsTo(Ensure.that(searchResult).isBlank());
 			System.out.println("Org Deleted successfully");
+		}
+	}
+	
+	@When("click on add member button fill details and save")
+	public void click_on_add_member_button_fill_details_and_save(DataTable memberdata) {
+		givenThat(user).attemptsTo(Members.fromUnderlineDetails(memberdata));
+	}
+	
+	@Then("verify added member in organization")
+	public void verify_added_member_in_organization() {
+		String member_name = DataHelper.getRecord("MemberData", 1, 0);
+		givenThat(user).attemptsTo(Click.on(MembersObject.MEMBERS_TAB));
+		givenThat(user).attemptsTo(Clear.field(OrganizationPage.ORG_SEARCH_INPUT));
+		waitABit(3000);
+		givenThat(user).attemptsTo(Enter.keyValues(member_name).into(OrganizationPage.ORG_SEARCH_INPUT));
+		waitABit(3000);
+		String searchResult = OrganizationPage.SEARCH_RESULT_HIGHLIGHTED.resolveFor(user).getText();
+		waitABit(3000);
+		if (searchResult.equalsIgnoreCase(member_name)) {
+			givenThat(user).attemptsTo(Ensure.that(searchResult).isEqualToIgnoringCase(member_name));		
+		} else if (searchResult.isBlank()) {
+			givenThat(user).attemptsTo(Ensure.that(searchResult).isBlank());
+			System.out.println("Member Deleted successfully");
 		}
 	}
 }

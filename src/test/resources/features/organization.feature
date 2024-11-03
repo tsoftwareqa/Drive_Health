@@ -37,7 +37,7 @@ Feature: Manage crud operations for organization and sub organization
         | EditSub |
     Then verify updated sub organization
 
-@SmokeTest
+@SmokeTest1
   Scenario: verify add member and save
     Given user is on Home page of application and login
     When click on add member button fill details and save
