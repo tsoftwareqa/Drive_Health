@@ -37,4 +37,8 @@ public class MembersObject extends PageObject {
 
 	public static Target SAVE_SEND_INVITE = Target.the("save send invite").locatedBy("//button[contains(text(),'Save & Send Invite')]");
 
+	public static Target EDIT = Target.the("edit").locatedBy("//div[contains(text(),'Edit')]");
+
+	public static Target DELETE = Target.the("delete").locatedBy("(//div[contains(text(),'Delete')])[2]");
+
 }

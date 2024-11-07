@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import com.drivehealth.test.utils.DataHelper;
 
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
@@ -59,12 +60,19 @@ public class OrganizationPage extends PageObject {
 		return findAll(ALL_ORG).stream().map(WebElementFacade::getText).collect(Collectors.toList());
 	}
 
-	public void getElement() {
+	public void getElements() {
 		List<WebElement> element =  getDriver().findElements(By.xpath("//div[@data-state='closed']/child::button"));
 		((JavascriptExecutor) getDriver()).executeScript(
 	            "arguments[0].scrollIntoView();", element.get(element.size()-1));
 		    element.get(element.size()-1).click();
 		   }
+	
+	public void getElement() {
+		List<WebElement> element =  getDriver().findElements(By.xpath("//div[@data-state='closed']/child::button"));
+		((JavascriptExecutor) getDriver()).executeScript(
+	            "document.querySelector(\"div[class='h-full w-full rounded-[inherit]']\").scrollTop=20000");
+		 element.get(element.size()-1).click();
+   }
 	/*
 	 * public static void main(String args[]) {
 	 * System.out.println(OrganizationPage.generateRandomString()); }

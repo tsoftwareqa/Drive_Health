@@ -98,7 +98,7 @@ public class Organization extends UIInteractions implements Task {
 				break;
 				
 			case "AddSub":
-				waitABit(1000);
+				waitABit(6000);
 			    orgpage.getElement();
 			    
 			    waitABit(2000);

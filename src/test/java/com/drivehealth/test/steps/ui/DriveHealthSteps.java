@@ -135,11 +135,15 @@ public class DriveHealthSteps extends UIInteractionSteps{
 		}
 	}
 	
+	@When("click on three dot icon and delete member")
+	@When("click on three dot icon and change member details")
 	@When("click on add member button fill details and save")
 	public void click_on_add_member_button_fill_details_and_save(DataTable memberdata) {
 		givenThat(user).attemptsTo(Members.fromUnderlineDetails(memberdata));
 	}
 	
+	@Then("verify deleted member")
+	@Then("verify updated member in organization")
 	@Then("verify added member in organization")
 	public void verify_added_member_in_organization() {
 		String member_name = DataHelper.getRecord("MemberData", 1, 0);

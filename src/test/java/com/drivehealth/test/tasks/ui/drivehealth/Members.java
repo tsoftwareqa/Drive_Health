@@ -16,6 +16,7 @@ import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Clear;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import net.serenitybdd.screenplay.actions.Scroll;
 import net.serenitybdd.screenplay.actions.SelectFromOptions;
 import net.serenitybdd.screenplay.ui.Dropdown;
 import net.serenitybdd.screenplay.ui.Select;
@@ -43,7 +44,7 @@ public class Members extends UIInteractions implements Task {
 
 		switch (action) {
 		case "Add":
-			waitABit(1000);
+			waitABit(6000);
 		    orgpage.getElement();
 		    
 		    waitABit(2000);
@@ -84,49 +85,53 @@ public class Members extends UIInteractions implements Task {
 			DataHelper.writeMemberInfo(firstname,0);
 			waitABit(1000);
 				
-			actor.attemptsTo(Click.on(MembersObject.SAVE_SEND_INVITE));
+			actor.attemptsTo(Scroll.to(OrganizationPage.SAVE_BTN).andAlignToTop());
+			waitABit(1000);
+			
+			actor.attemptsTo(Click.on(OrganizationPage.SAVE_BTN));
 			waitABit(2000);
 			break;
 
 		case "Edit":
-			waitABit(1000);
-			actor.attemptsTo(
-					Enter.keyValues(DataHelper.getRecord("OrgData", 1, 0)).into(OrganizationPage.ORG_SEARCH_INPUT));
-			waitABit(3000);
-
+			waitABit(6000);
+		    orgpage.getElement();
+		    
+		    actor.attemptsTo(Click.on(MembersObject.MEMBERS_TAB));
+			waitABit(2000);
+			
 			actor.attemptsTo(Click.on(OrganizationPage.THREE_DOT_ICON));
 			waitABit(2000);
-
-			actor.attemptsTo(Click.on(OrganizationPage.EDIT));
-			waitABit(2000);
-
-			actor.attemptsTo(Clear.field(OrganizationPage.ORG_NAME));
-			waitABit(2000);
-
-			membername = "AUTO_ORG_" + OrganizationPage.generateRandomString();
-			actor.attemptsTo(Enter.keyValues(membername).into(OrganizationPage.ORG_NAME));
-
 			
-			DataHelper.writeOrgInfo(membername, 0);
+			actor.attemptsTo(Click.on(MembersObject.EDIT));
 			waitABit(2000);
+			
+			actor.attemptsTo(Clear.field(MembersObject.FIRST_NAME));
+			waitABit(2000);
+		    
+			String first_name = "First"+CommonUtil.generateRandomNumber();
+			actor.attemptsTo(Enter.keyValues(first_name).into(MembersObject.FIRST_NAME));
+			DataHelper.writeMemberInfo(first_name,0);
+			
+			actor.attemptsTo(Scroll.to(OrganizationPage.SAVE_BTN).andAlignToTop());
+			waitABit(1000);
 
 			actor.attemptsTo(Click.on(OrganizationPage.SAVE_BTN));
 			waitABit(2000);
 			break;
 
 		case "Delete":
-
-			waitABit(1000);
-			actor.attemptsTo(
-					Enter.keyValues(DataHelper.getRecord("OrgData", 1, 0)).into(OrganizationPage.ORG_SEARCH_INPUT));
-			waitABit(3000);
-
+			waitABit(6000);
+		    orgpage.getElement();
+		    
+		    actor.attemptsTo(Click.on(MembersObject.MEMBERS_TAB));
+			waitABit(2000);
+			
 			actor.attemptsTo(Click.on(OrganizationPage.THREE_DOT_ICON));
 			waitABit(2000);
-
-			actor.attemptsTo(Click.on(OrganizationPage.DELETE));
-			waitABit(3000);
-
+			
+			actor.attemptsTo(Click.on(MembersObject.DELETE));
+			waitABit(2000);
+			
 			actor.attemptsTo(Click.on(OrganizationPage.DELETE_BTN));
 			waitABit(3000);
 
