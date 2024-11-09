@@ -96,8 +96,8 @@ public class DataHelper {
 		logger.info("Excel file has been generated successfully");
 	}
 	
-	public static void writeMemberInfo(String membername,int cell) {
-		sheet = workbook.getSheet("MemberData");
+	public static void writeMemberInfo(String sheetname, String membername,int cell) {
+		sheet = workbook.getSheet(sheetname);
 			XSSFRow row = sheet.createRow((short) 1);
 			row.createCell(cell).setCellValue(membername);		
 		try {

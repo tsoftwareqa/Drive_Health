@@ -116,7 +116,7 @@ public class CommonUtil {
 	
 	public static String captureScreenshot(WebDriver driver) {
 		File src=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		String screenshotpath=System.getProperty("user.dir")+"/src/test/resources/Screenshots/"+getCurrentDateTime()+ ".png";
+		String screenshotpath=System.getProperty("user.dir")+"/src/test/resources/screenshots/"+getCurrentDateTime()+ ".png";
 		try {
 			FileHandler.copy(src, new File(screenshotpath));
 			System.out.println("Screenshot captured successfully");
@@ -126,4 +126,19 @@ public class CommonUtil {
        return screenshotpath;
 	}
 	
+	public static String generateRandomString() {
+
+		final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+		// Initializing the random variable
+		Random random = new Random();
+
+		StringBuilder sb = new StringBuilder();
+
+		// Generating Random String using loop
+		for (int i = 0; i < 5; i++) {
+			sb.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length())));
+		}
+		return sb.toString();
+	}
 }

@@ -1,6 +1,6 @@
 Feature: Manage crud operations for organization and sub organization
 
-@SmokeTest2
+@SmokeTest
   Scenario: verify add organization and save
     Given user is on Home page of application and login
     When click on organization button fill details and save
@@ -21,7 +21,7 @@ Feature: Manage crud operations for organization and sub organization
         | Edit   |
     Then update organization and verify
        
-@SmokeTest2
+@SmokeTest
   Scenario: verify add sub organization and save
     Given user is on Home page of application and login
     When click on sub organization button and fill details and save
@@ -37,7 +37,7 @@ Feature: Manage crud operations for organization and sub organization
         | EditSub |
     Then verify updated sub organization
 
-@SmokeTest2
+@SmokeTest
   Scenario: verify add member and save
     Given user is on Home page of application and login
     When click on add member button fill details and save
@@ -45,23 +45,47 @@ Feature: Manage crud operations for organization and sub organization
         | Add    |
     Then verify added member in organization
 
-@SmokeTest2
+@SmokeTest
   Scenario: verify edit member and save
     Given user is on Home page of application and login
     When click on three dot icon and change member details
         | Action |
         | Edit   |
     Then verify updated member in organization
+        
+@SmokeTest
+  Scenario: verify add staff and save
+    Given user is on Home page of application and login
+    When click on add staff button fill details and save
+        | Action |
+        | Add    |
+    Then verify added staff in organization
+
+@SmokeTest
+  Scenario: verify edit staff and save
+    Given user is on Home page of application and login
+    When click on three dot icon and change staff details
+        | Action |
+        | Edit   |
+    Then verify updated staff in organization
      
-@SmokeTest2
+@SmokeTest
   Scenario: delete member and verify
     Given user is on Home page of application and login
     When click on three dot icon and delete member
         | Action |
         | Delete |
     Then verify deleted member
+ 
+@SmokeTest
+  Scenario: delete staff and verify
+    Given user is on Home page of application and login
+    When click on three dot icon and delete staff
+        | Action |
+        | Delete |
+    Then verify deleted staff
      
-@SmokeTest1
+@SmokeTest
   Scenario: delete sub organization and verify
     Given user is on Home page of application and login
     When click on three dot icon and delete sub org
@@ -69,7 +93,7 @@ Feature: Manage crud operations for organization and sub organization
         | DeleteSub |
     Then verify deleted sub organization
     
-@SmokeTest1
+@SmokeTest
   Scenario: delete organization and verify
     Given user is on Home page of application and login
     When click on three dot icon and delete org

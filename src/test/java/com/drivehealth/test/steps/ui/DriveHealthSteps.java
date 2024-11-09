@@ -6,9 +6,12 @@ import java.util.logging.Logger;
 import com.drivehealth.test.page_objects.HomePage;
 import com.drivehealth.test.page_objects.MembersObject;
 import com.drivehealth.test.page_objects.OrganizationPage;
+import com.drivehealth.test.page_objects.StaffObjects;
 import com.drivehealth.test.tasks.ui.common.Login;
 import com.drivehealth.test.tasks.ui.drivehealth.Members;
 import com.drivehealth.test.tasks.ui.drivehealth.Organization;
+import com.drivehealth.test.tasks.ui.drivehealth.Staff;
+import com.drivehealth.test.utils.CommonUtil;
 import com.drivehealth.test.utils.DataHelper;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.Before;
@@ -104,9 +107,11 @@ public class DriveHealthSteps extends UIInteractionSteps{
 		String searchResult = OrganizationPage.SEARCH_RESULT_HIGHLIGHTED.resolveFor(user).getText();
 		waitABit(3000);
 		if (searchResult.equalsIgnoreCase(org_name)) {
-			givenThat(user).attemptsTo(Ensure.that(searchResult).isEqualToIgnoringCase(org_name));		
+			givenThat(user).attemptsTo(Ensure.that(searchResult).isEqualToIgnoringCase(org_name));	
+			CommonUtil.captureScreenshot(getDriver());
 		} else if (searchResult.isBlank()) {
 			givenThat(user).attemptsTo(Ensure.that(searchResult).isBlank());
+			CommonUtil.captureScreenshot(getDriver());
 			System.out.println("Org Deleted successfully");
 		}
 	}
@@ -129,8 +134,10 @@ public class DriveHealthSteps extends UIInteractionSteps{
 		waitABit(3000);
 		if (searchResult.equalsIgnoreCase(org_name)) {
 			givenThat(user).attemptsTo(Ensure.that(searchResult).isEqualToIgnoringCase(org_name));		
+			CommonUtil.captureScreenshot(getDriver());
 		} else if (searchResult.isBlank()) {
 			givenThat(user).attemptsTo(Ensure.that(searchResult).isBlank());
+			CommonUtil.captureScreenshot(getDriver());
 			System.out.println("Org Deleted successfully");
 		}
 	}
@@ -155,10 +162,41 @@ public class DriveHealthSteps extends UIInteractionSteps{
 		String searchResult = OrganizationPage.SEARCH_RESULT_HIGHLIGHTED.resolveFor(user).getText();
 		waitABit(3000);
 		if (searchResult.equalsIgnoreCase(member_name)) {
-			givenThat(user).attemptsTo(Ensure.that(searchResult).isEqualToIgnoringCase(member_name));		
+			givenThat(user).attemptsTo(Ensure.that(searchResult).isEqualToIgnoringCase(member_name));	
+			CommonUtil.captureScreenshot(getDriver());
 		} else if (searchResult.isBlank()) {
 			givenThat(user).attemptsTo(Ensure.that(searchResult).isBlank());
 			System.out.println("Member Deleted successfully");
+			CommonUtil.captureScreenshot(getDriver());
+		}
+	}
+	
+	@When("click on three dot icon and delete staff")
+	@When("click on three dot icon and change staff details")
+	@When("click on add staff button fill details and save")
+	public void click_on_add_staff_button_fill_details_and_save(DataTable staffdata) {
+		givenThat(user).attemptsTo(Staff.fromUnderlineDetails(staffdata));
+	}
+	
+	@Then("verify deleted staff")
+	@Then("verify updated staff in organization")
+	@Then("verify added staff in organization")
+	public void verify_added_staff_in_organization() {
+		String member_name = DataHelper.getRecord("StaffData", 1, 0);
+		givenThat(user).attemptsTo(Click.on(StaffObjects.STAFF_TAB));
+		givenThat(user).attemptsTo(Clear.field(OrganizationPage.ORG_SEARCH_INPUT));
+		waitABit(3000);
+		givenThat(user).attemptsTo(Enter.keyValues(member_name).into(OrganizationPage.ORG_SEARCH_INPUT));
+		waitABit(3000);
+		String searchResult = OrganizationPage.SEARCH_RESULT_HIGHLIGHTED.resolveFor(user).getText();
+		waitABit(3000);
+		if (searchResult.equalsIgnoreCase(member_name)) {
+			givenThat(user).attemptsTo(Ensure.that(searchResult).isEqualToIgnoringCase(member_name));
+			CommonUtil.captureScreenshot(getDriver());
+		} else if (searchResult.isBlank()) {
+			givenThat(user).attemptsTo(Ensure.that(searchResult).isBlank());
+			CommonUtil.captureScreenshot(getDriver());
+			System.out.println("Staff Deleted successfully");
 		}
 	}
 }
