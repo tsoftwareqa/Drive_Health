@@ -7,6 +7,9 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.net.URI;
+import java.net.URL;
 import java.util.Map;
 
 import org.openqa.selenium.Keys;
@@ -35,6 +38,7 @@ public class Members extends UIInteractions implements Task {
 
 	private static String action;
 	OrganizationPage orgpage;
+	MembersObject membersObject;
 
 	public Members(String action) {
 		this.action = action;
@@ -149,8 +153,8 @@ public class Members extends UIInteractions implements Task {
 			
 		case "AddBulk":
 			waitABit(3000);
-			actor.attemptsTo(Click.on(MembersObject.BULK_ORG));
-		    
+			membersObject.getElement();
+			
 		    waitABit(2000);
 		    actor.attemptsTo(Click.on(MembersObject.MEMBERS_BTN));
 		    
@@ -162,10 +166,11 @@ public class Members extends UIInteractions implements Task {
 		    
 		    waitABit(2000);
 		    
+		    //"C:\\workspace\\Drive_Health\\src\\test\\resources\\sources\\sample_bullk_upload.csv"
 		    try {
+		    	String file = System.getProperty("user.dir")+"\\sources\\sample_bullk_upload.csv";
 				Robot rwRobot = new Robot();
-				StringSelection stringSelection = new StringSelection(
-						"C:\\workspace\\Drive_Health\\src\\test\\resources\\sources\\sample_bullk_upload.csv");
+				StringSelection stringSelection = new StringSelection("C:\\workspace\\Drive_Health\\src\\test\\resources\\sources\\sample_bullk_upload.csv");
 				Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
 				rwRobot.keyPress(KeyEvent.VK_CONTROL);
 				rwRobot.keyPress(KeyEvent.VK_V);
@@ -197,6 +202,29 @@ public class Members extends UIInteractions implements Task {
 			  
 			  actor.attemptsTo(Ensure.that(searchResult).isEqualToIgnoringCase("FirstB LastB"));
 			 
+			break;
+			
+		case "Deletebulk":
+			waitABit(3000);
+		    
+			membersObject.getElement();
+		    waitABit(2000);
+		    
+		    actor.attemptsTo(Click.on(MembersObject.MEMBERS_TAB));
+		    waitABit(2000);			   
+		    
+		    actor.attemptsTo(Enter.keyValues("FirstB").into(OrganizationPage.ORG_SEARCH_INPUT));
+		    waitABit(3000);
+			
+			actor.attemptsTo(Click.on(OrganizationPage.THREE_DOT_ICON));
+			waitABit(2000);
+			
+			actor.attemptsTo(Click.on(MembersObject.DELETE));
+			waitABit(2000);
+			
+			actor.attemptsTo(Click.on(OrganizationPage.DELETE_BTN));
+			waitABit(3000);
+			
 			break;
 		default:
 			System.out.println("No action");

@@ -107,11 +107,11 @@ public class DriveHealthSteps extends UIInteractionSteps{
 		String searchResult = OrganizationPage.SEARCH_RESULT_HIGHLIGHTED.resolveFor(user).getText();
 		waitABit(3000);
 		if (searchResult.equalsIgnoreCase(org_name)) {
+			CommonUtil.captureScreenshot(getDriver());
 			givenThat(user).attemptsTo(Ensure.that(searchResult).isEqualToIgnoringCase(org_name));	
-			CommonUtil.captureScreenshot(getDriver());
 		} else if (searchResult.isBlank()) {
-			givenThat(user).attemptsTo(Ensure.that(searchResult).isBlank());
 			CommonUtil.captureScreenshot(getDriver());
+			givenThat(user).attemptsTo(Ensure.that(searchResult).isBlank());
 			System.out.println("Org Deleted successfully");
 		}
 	}
@@ -133,15 +133,16 @@ public class DriveHealthSteps extends UIInteractionSteps{
 		String searchResult = OrganizationPage.SEARCH_RESULT_HIGHLIGHTED.resolveFor(user).getText();
 		waitABit(3000);
 		if (searchResult.equalsIgnoreCase(org_name)) {
-			givenThat(user).attemptsTo(Ensure.that(searchResult).isEqualToIgnoringCase(org_name));		
 			CommonUtil.captureScreenshot(getDriver());
+			givenThat(user).attemptsTo(Ensure.that(searchResult).isEqualToIgnoringCase(org_name));
 		} else if (searchResult.isBlank()) {
-			givenThat(user).attemptsTo(Ensure.that(searchResult).isBlank());
 			CommonUtil.captureScreenshot(getDriver());
+			givenThat(user).attemptsTo(Ensure.that(searchResult).isBlank());
 			System.out.println("Org Deleted successfully");
 		}
 	}
 	
+	@When("click on three dot icon and delete member added via bulk")
 	@When("add member via bulk upload")
 	@When("click on three dot icon and delete member")
 	@When("click on three dot icon and change member details")
@@ -163,12 +164,12 @@ public class DriveHealthSteps extends UIInteractionSteps{
 		String searchResult = OrganizationPage.SEARCH_RESULT_HIGHLIGHTED.resolveFor(user).getText();
 		waitABit(3000);
 		if (searchResult.equalsIgnoreCase(member_name)) {
-			givenThat(user).attemptsTo(Ensure.that(searchResult).isEqualToIgnoringCase(member_name));	
 			CommonUtil.captureScreenshot(getDriver());
+			givenThat(user).attemptsTo(Ensure.that(searchResult).isEqualToIgnoringCase(member_name));	
 		} else if (searchResult.isBlank()) {
+			CommonUtil.captureScreenshot(getDriver());
 			givenThat(user).attemptsTo(Ensure.that(searchResult).isBlank());
 			System.out.println("Member Deleted successfully");
-			CommonUtil.captureScreenshot(getDriver());
 		}
 	}
 	
@@ -192,11 +193,11 @@ public class DriveHealthSteps extends UIInteractionSteps{
 		String searchResult = OrganizationPage.SEARCH_RESULT_HIGHLIGHTED.resolveFor(user).getText();
 		waitABit(3000);
 		if (searchResult.equalsIgnoreCase(member_name)) {
+			CommonUtil.captureScreenshot(getDriver());
 			givenThat(user).attemptsTo(Ensure.that(searchResult).isEqualToIgnoringCase(member_name));
-			CommonUtil.captureScreenshot(getDriver());
 		} else if (searchResult.isBlank()) {
-			givenThat(user).attemptsTo(Ensure.that(searchResult).isBlank());
 			CommonUtil.captureScreenshot(getDriver());
+			givenThat(user).attemptsTo(Ensure.that(searchResult).isBlank());
 			System.out.println("Staff Deleted successfully");
 		}
 	}
@@ -204,5 +205,20 @@ public class DriveHealthSteps extends UIInteractionSteps{
 	@Then("verify added member via bulk in organization")
 	public void verify_added_member_via_bulk_in_organization() {
 		
+	}
+	
+	@Then("verify deleted member added via bulk")
+	public void verify_deleted_member_added_via_bulk() {
+		givenThat(user).attemptsTo(Clear.field(OrganizationPage.ORG_SEARCH_INPUT));
+		waitABit(3000);
+		givenThat(user).attemptsTo(Enter.keyValues("FirstB").into(OrganizationPage.ORG_SEARCH_INPUT));
+		waitABit(3000);
+		String searchResult = OrganizationPage.SEARCH_RESULT_HIGHLIGHTED.resolveFor(user).getText();
+		waitABit(3000);
+		if(searchResult.isBlank()) {
+			CommonUtil.captureScreenshot(getDriver());
+			givenThat(user).attemptsTo(Ensure.that(searchResult).isBlank());
+			System.out.println("Staff Deleted successfully");
+		}
 	}
 }

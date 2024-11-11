@@ -1,5 +1,11 @@
 package com.drivehealth.test.page_objects;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.screenplay.targets.Target;
 
@@ -49,5 +55,10 @@ public class MembersObject extends PageObject {
 	
 	public static Target SEARCH_RESULT_HIGHLIGHTED = Target.the("search result").locatedBy(
 			"(//span[@class='_Highlighted_18z0f_1'])[1]");
+	
+	public void getElement() {
+		List<WebElement> element =  getDriver().findElements(By.xpath("//div[@data-state='closed']/child::button"));
+		element.get(1).click();
+   }
 	
 }
