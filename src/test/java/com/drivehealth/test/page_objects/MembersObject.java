@@ -41,4 +41,13 @@ public class MembersObject extends PageObject {
 
 	public static Target DELETE = Target.the("delete").locatedBy("(//div[contains(text(),'Delete')])[2]");
 
+	public static Target CLICK_TO_UPLOAD = Target.the("click to upload").locatedBy("//div[@class='flex items-center justify-center flex-col pt-3 pb-4 w-full ']/descendant::span");
+
+	public static Target BULK_ORG = Target.the("bulk org").locatedBy("//span[contains(text(),'TEst1')]");
+	
+	public static Target UPLOAD_BTN = Target.the("upload btn").locatedBy("(//button[contains(text(),'Upload')])[2]");
+	
+	public static Target SEARCH_RESULT_HIGHLIGHTED = Target.the("search result").locatedBy(
+			"(//span[@class='_Highlighted_18z0f_1'])[1]");
+	
 }

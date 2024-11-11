@@ -68,6 +68,14 @@ Feature: Manage crud operations for organization and sub organization
         | Action |
         | Edit   |
     Then verify updated staff in organization
+  
+@SmokeTest1
+  Scenario: verify add member via bulk upload
+    Given user is on Home page of application and login
+    When add member via bulk upload
+        | Action  |
+        | AddBulk |
+    Then verify added member via bulk in organization  
      
 @SmokeTest
   Scenario: delete member and verify

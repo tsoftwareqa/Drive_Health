@@ -142,6 +142,7 @@ public class DriveHealthSteps extends UIInteractionSteps{
 		}
 	}
 	
+	@When("add member via bulk upload")
 	@When("click on three dot icon and delete member")
 	@When("click on three dot icon and change member details")
 	@When("click on add member button fill details and save")
@@ -198,5 +199,10 @@ public class DriveHealthSteps extends UIInteractionSteps{
 			CommonUtil.captureScreenshot(getDriver());
 			System.out.println("Staff Deleted successfully");
 		}
+	}
+	
+	@Then("verify added member via bulk in organization")
+	public void verify_added_member_via_bulk_in_organization() {
+		
 	}
 }

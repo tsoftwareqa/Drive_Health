@@ -11,7 +11,7 @@ import net.serenitybdd.cucumber.CucumberWithSerenity;
         features = {"src/test/resources/features/organization.feature"},
         plugin = {"pretty"},
         glue = {"com.drivehealth.test"},
-        tags = "@SmokeTest",
+        tags = "@SmokeTest1",
         dryRun = false)
 
 public class DriveHealthRunner {
