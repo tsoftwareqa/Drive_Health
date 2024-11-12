@@ -35,6 +35,7 @@ public class DriveHealthSteps extends UIInteractionSteps{
 
 	private Actor user;
 	private HomePage homepage;
+	MembersObject membersObject;
 		
 	@Before(order = 2)
 	public void setup() {
@@ -220,5 +221,22 @@ public class DriveHealthSteps extends UIInteractionSteps{
 			givenThat(user).attemptsTo(Ensure.that(searchResult).isBlank());
 			System.out.println("Staff Deleted successfully");
 		}
+	}
+	
+	@When("navigate to upload history tab in a organization")
+	public void navigate_to_upload_history_tab_in_a_organization() {
+		waitABit(3000);
+		membersObject.getElement();
+		givenThat(user).attemptsTo(Click.on(OrganizationPage.UPLOAD_HISTORY_TAB));
+	}
+	
+	@Then("verify upload history")
+	public void verify_upload_history() {
+		waitABit(3000);
+		String fileName = OrganizationPage.FILE_NAME.resolveFor(user).getText();
+		String successCount = OrganizationPage.SUCCESS.resolveFor(user).getText();
+		CommonUtil.captureScreenshot(getDriver());
+		givenThat(user).attemptsTo(Ensure.that(fileName).isEqualTo("sample_bullk_upload.csv"));
+		givenThat(user).attemptsTo(Ensure.that(successCount).isEqualTo("1 Success"));
 	}
 }

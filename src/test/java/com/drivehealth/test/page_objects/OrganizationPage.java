@@ -31,6 +31,9 @@ public class OrganizationPage extends PageObject {
 	public static Target ALL_ORG = Target.the(" all org").locatedBy("//div[@data-state='closed']/child::button");
 	public static Target SUB_ORG_BTN = Target.the("sub org btn").locatedBy("//button[contains(text(),'Sub-Organization')]");
 	public static Target SHOW_SUB_ORG_CHKBOX = Target.the("checkbox").locatedBy("//button[@id='include-option']");
+	public static Target UPLOAD_HISTORY_TAB = Target.the("upload history tab").locatedBy("//button[contains(text(),'Upload History')]");
+	public static Target FILE_NAME = Target.the("file name").locatedBy("(//tr[@class='border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted'])[2]/descendant::span[2]");
+	public static Target SUCCESS = Target.the("success").locatedBy("(//tr[@class='border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted'])[2]/td[3]/descendant::div[@class='text-green-500 whitespace-nowrap']");
 	
 	
 	public static char rndChar() {
