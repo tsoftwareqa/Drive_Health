@@ -44,7 +44,10 @@ public class Staff extends UIInteractions implements Task{
 		switch (action) {
 		case "Add":
 			waitABit(6000);
-		    orgpage.getElement();
+			actor.attemptsTo(Enter.keyValues(DataHelper.getRecord("OrgData", 1, 0)).into(OrganizationPage.ORG_SEARCH_INPUT));
+			
+			waitABit(2000);
+		    actor.attemptsTo(Click.on(OrganizationPage.ORG_NAME_LINK));
 		    
 		    waitABit(2000);
 		    actor.attemptsTo(Click.on(StaffObjects.STAFF_BTN));
@@ -78,7 +81,10 @@ public class Staff extends UIInteractions implements Task{
 
 		case "Edit":
 			waitABit(6000);
-		    orgpage.getElement();
+			actor.attemptsTo(Enter.keyValues(DataHelper.getRecord("OrgData", 1, 0)).into(OrganizationPage.ORG_SEARCH_INPUT));
+			
+			waitABit(2000);
+		    actor.attemptsTo(Click.on(OrganizationPage.ORG_NAME_LINK));
 		    
 		    actor.attemptsTo(Click.on(StaffObjects.STAFF_TAB));
 			waitABit(2000);
@@ -103,7 +109,10 @@ public class Staff extends UIInteractions implements Task{
 
 		case "Delete":
 			waitABit(6000);
-		    orgpage.getElement();
+			actor.attemptsTo(Enter.keyValues(DataHelper.getRecord("OrgData", 1, 0)).into(OrganizationPage.ORG_SEARCH_INPUT));
+			
+			waitABit(2000);
+		    actor.attemptsTo(Click.on(OrganizationPage.ORG_NAME_LINK));
 		    
 		    actor.attemptsTo(Click.on(StaffObjects.STAFF_TAB));
 			waitABit(2000);

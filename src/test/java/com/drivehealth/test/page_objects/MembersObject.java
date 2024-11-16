@@ -57,7 +57,7 @@ public class MembersObject extends PageObject {
 			"(//span[@class='_Highlighted_18z0f_1'])[1]");
 	
 	public void getElement() {
-		List<WebElement> element =  getDriver().findElements(By.xpath("//div[@data-state='closed']/child::button"));
+		List<WebElement> element =  getDriver().findElements(By.xpath("//ul[@class='w-full']/descendant::span"));
 		element.get(1).click();
    }
 	

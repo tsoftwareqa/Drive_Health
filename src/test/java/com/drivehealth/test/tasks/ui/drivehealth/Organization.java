@@ -99,7 +99,10 @@ public class Organization extends UIInteractions implements Task {
 				
 			case "AddSub":
 				waitABit(6000);
-			    orgpage.getElement();
+				actor.attemptsTo(Enter.keyValues(DataHelper.getRecord("OrgData", 1, 0)).into(OrganizationPage.ORG_SEARCH_INPUT));
+				
+				waitABit(2000);
+			    actor.attemptsTo(Click.on(OrganizationPage.ORG_NAME_LINK));
 			    
 			    waitABit(2000);
 			    actor.attemptsTo(Click.on(OrganizationPage.SUB_ORG_BTN));

@@ -1,26 +1,16 @@
 package com.drivehealth.test.tasks.ui.drivehealth;
 
-import static net.serenitybdd.screenplay.GivenWhenThen.givenThat;
-
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
-import java.io.File;
-import java.net.URI;
-import java.net.URL;
 import java.util.Map;
-
-import org.openqa.selenium.Keys;
-
 import com.drivehealth.test.page_objects.MembersObject;
 import com.drivehealth.test.page_objects.OrganizationPage;
 import com.drivehealth.test.utils.CommonUtil;
 import com.drivehealth.test.utils.ConvertCucumberDataTable;
 import com.drivehealth.test.utils.DataHelper;
-
-
 import io.cucumber.datatable.DataTable;
 import net.serenitybdd.core.steps.UIInteractions;
 import net.serenitybdd.screenplay.Actor;
@@ -31,8 +21,6 @@ import net.serenitybdd.screenplay.actions.Enter;
 import net.serenitybdd.screenplay.actions.Scroll;
 import net.serenitybdd.screenplay.actions.SelectFromOptions;
 import net.serenitybdd.screenplay.ensure.Ensure;
-import net.serenitybdd.screenplay.ui.Dropdown;
-import net.serenitybdd.screenplay.ui.Select;
 
 public class Members extends UIInteractions implements Task {
 
@@ -59,7 +47,10 @@ public class Members extends UIInteractions implements Task {
 		switch (action) {
 		case "Add":
 			waitABit(6000);
-		    orgpage.getElement();
+			actor.attemptsTo(Enter.keyValues(DataHelper.getRecord("OrgData", 1, 0)).into(OrganizationPage.ORG_SEARCH_INPUT));
+			
+			waitABit(2000);
+		    actor.attemptsTo(Click.on(OrganizationPage.ORG_NAME_LINK));
 		    
 		    waitABit(2000);
 		    actor.attemptsTo(Click.on(MembersObject.MEMBERS_BTN));
@@ -108,7 +99,10 @@ public class Members extends UIInteractions implements Task {
 
 		case "Edit":
 			waitABit(6000);
-		    orgpage.getElement();
+			actor.attemptsTo(Enter.keyValues(DataHelper.getRecord("OrgData", 1, 0)).into(OrganizationPage.ORG_SEARCH_INPUT));
+			
+			waitABit(2000);
+		    actor.attemptsTo(Click.on(OrganizationPage.ORG_NAME_LINK));
 		    
 		    actor.attemptsTo(Click.on(MembersObject.MEMBERS_TAB));
 			waitABit(2000);
@@ -135,7 +129,10 @@ public class Members extends UIInteractions implements Task {
 
 		case "Delete":
 			waitABit(6000);
-		    orgpage.getElement();
+			actor.attemptsTo(Enter.keyValues(DataHelper.getRecord("OrgData", 1, 0)).into(OrganizationPage.ORG_SEARCH_INPUT));
+			
+			waitABit(2000);
+		    actor.attemptsTo(Click.on(OrganizationPage.ORG_NAME_LINK));
 		    
 		    actor.attemptsTo(Click.on(MembersObject.MEMBERS_TAB));
 			waitABit(2000);
@@ -168,7 +165,6 @@ public class Members extends UIInteractions implements Task {
 		    
 		    //"C:\\workspace\\Drive_Health\\src\\test\\resources\\sources\\sample_bullk_upload.csv"
 		    try {
-		    	String file = System.getProperty("user.dir")+"\\sources\\sample_bullk_upload.csv";
 				Robot rwRobot = new Robot();
 				StringSelection stringSelection = new StringSelection("C:\\workspace\\Drive_Health\\src\\test\\resources\\sources\\sample_bullk_upload.csv");
 				Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);

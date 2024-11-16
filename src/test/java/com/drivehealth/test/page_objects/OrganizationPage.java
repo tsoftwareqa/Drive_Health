@@ -1,5 +1,6 @@
 package com.drivehealth.test.page_objects;
 
+import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -34,8 +35,8 @@ public class OrganizationPage extends PageObject {
 	public static Target UPLOAD_HISTORY_TAB = Target.the("upload history tab").locatedBy("//button[contains(text(),'Upload History')]");
 	public static Target FILE_NAME = Target.the("file name").locatedBy("(//tr[@class='border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted'])[2]/descendant::span[2]");
 	public static Target SUCCESS = Target.the("success").locatedBy("(//tr[@class='border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted'])[2]/td[3]/descendant::div[@class='text-green-500 whitespace-nowrap']");
-	
-	
+	public static Target ORG_NAME_LINK = Target.the("org name link").locatedBy("(//span[@class='_Highlighted_18z0f_1'])[1]");
+		
 	public static char rndChar() {
 		int rnd = (int) (Math.random() * 52); // or use Random or whatever
 		char base = (rnd < 26) ? 'A' : 'a';
@@ -76,8 +77,13 @@ public class OrganizationPage extends PageObject {
 	            "document.querySelector(\"div[class='h-full w-full rounded-[inherit]']\").scrollTop=20000");
 		 element.get(element.size()-1).click();
    }
-	/*
-	 * public static void main(String args[]) {
-	 * System.out.println(OrganizationPage.generateRandomString()); }
-	 */
+	
+	  public static void main(String args[]) {
+		  
+		  String file = System.getProperty("user.dir");
+	    	file.replaceAll("\\\\","\\\\");
+		         
+		   
+	  }
+	 
 }

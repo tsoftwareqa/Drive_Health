@@ -156,6 +156,7 @@ public class DriveHealthSteps extends UIInteractionSteps{
 	@Then("verify updated member in organization")
 	@Then("verify added member in organization")
 	public void verify_added_member_in_organization() {
+		waitABit(2000);
 		String member_name = DataHelper.getRecord("MemberData", 1, 0);
 		givenThat(user).attemptsTo(Click.on(MembersObject.MEMBERS_TAB));
 		givenThat(user).attemptsTo(Clear.field(OrganizationPage.ORG_SEARCH_INPUT));
@@ -185,6 +186,7 @@ public class DriveHealthSteps extends UIInteractionSteps{
 	@Then("verify updated staff in organization")
 	@Then("verify added staff in organization")
 	public void verify_added_staff_in_organization() {
+		waitABit(2000);
 		String member_name = DataHelper.getRecord("StaffData", 1, 0);
 		givenThat(user).attemptsTo(Click.on(StaffObjects.STAFF_TAB));
 		givenThat(user).attemptsTo(Clear.field(OrganizationPage.ORG_SEARCH_INPUT));
