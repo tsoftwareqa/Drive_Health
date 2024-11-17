@@ -5,6 +5,7 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.Map;
 import com.drivehealth.test.page_objects.MembersObject;
 import com.drivehealth.test.page_objects.OrganizationPage;
@@ -43,11 +44,12 @@ public class Members extends UIInteractions implements Task {
 	public <T extends Actor> void performAs(T actor) {
 
 		String membername = "";
+		String orgName = DataHelper.getRecord("OrgData", 1, 0);
 
 		switch (action) {
 		case "Add":
 			waitABit(6000);
-			actor.attemptsTo(Enter.keyValues(DataHelper.getRecord("OrgData", 1, 0)).into(OrganizationPage.ORG_SEARCH_INPUT));
+			actor.attemptsTo(Enter.keyValues(orgName).into(OrganizationPage.ORG_SEARCH_INPUT));
 			
 			waitABit(2000);
 		    actor.attemptsTo(Click.on(OrganizationPage.ORG_NAME_LINK));
@@ -99,7 +101,7 @@ public class Members extends UIInteractions implements Task {
 
 		case "Edit":
 			waitABit(6000);
-			actor.attemptsTo(Enter.keyValues(DataHelper.getRecord("OrgData", 1, 0)).into(OrganizationPage.ORG_SEARCH_INPUT));
+			actor.attemptsTo(Enter.keyValues(orgName).into(OrganizationPage.ORG_SEARCH_INPUT));
 			
 			waitABit(2000);
 		    actor.attemptsTo(Click.on(OrganizationPage.ORG_NAME_LINK));
@@ -129,7 +131,7 @@ public class Members extends UIInteractions implements Task {
 
 		case "Delete":
 			waitABit(6000);
-			actor.attemptsTo(Enter.keyValues(DataHelper.getRecord("OrgData", 1, 0)).into(OrganizationPage.ORG_SEARCH_INPUT));
+			actor.attemptsTo(Enter.keyValues(orgName).into(OrganizationPage.ORG_SEARCH_INPUT));
 			
 			waitABit(2000);
 		    actor.attemptsTo(Click.on(OrganizationPage.ORG_NAME_LINK));
@@ -149,9 +151,20 @@ public class Members extends UIInteractions implements Task {
 			break;
 			
 		case "AddBulk":
-			waitABit(3000);
-			membersObject.getElement();
+			waitABit(5000);
+			String filePath = "C:\\workspace\\Drive_Health\\src\\test\\resources\\sources\\sample_bullk_upload.csv";
+			try {
+				CommonUtil.writeAtPosition(filePath, 1, 11, orgName);
+			} catch (IOException | IllegalArgumentException e) {
+	            System.out.println("Error: " + e.getMessage());
+	        }
 			
+			waitABit(2000);
+			actor.attemptsTo(Enter.keyValues(orgName).into(OrganizationPage.ORG_SEARCH_INPUT));
+			
+			waitABit(2000);
+		    actor.attemptsTo(Click.on(OrganizationPage.ORG_NAME_LINK));
+		    
 		    waitABit(2000);
 		    actor.attemptsTo(Click.on(MembersObject.MEMBERS_BTN));
 		    
@@ -163,10 +176,9 @@ public class Members extends UIInteractions implements Task {
 		    
 		    waitABit(2000);
 		    
-		    //"C:\\workspace\\Drive_Health\\src\\test\\resources\\sources\\sample_bullk_upload.csv"
 		    try {
 				Robot rwRobot = new Robot();
-				StringSelection stringSelection = new StringSelection("C:\\workspace\\Drive_Health\\src\\test\\resources\\sources\\sample_bullk_upload.csv");
+				StringSelection stringSelection = new StringSelection(filePath);
 				Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
 				rwRobot.keyPress(KeyEvent.VK_CONTROL);
 				rwRobot.keyPress(KeyEvent.VK_V);
@@ -200,11 +212,12 @@ public class Members extends UIInteractions implements Task {
 			 
 			break;
 			
-		case "Deletebulk":
+		case "DeleteSinglebulkData":
 			waitABit(3000);
-		    
-			membersObject.getElement();
-		    waitABit(2000);
+			actor.attemptsTo(Enter.keyValues(orgName).into(OrganizationPage.ORG_SEARCH_INPUT));
+			
+			waitABit(2000);
+		    actor.attemptsTo(Click.on(OrganizationPage.ORG_NAME_LINK));
 		    
 		    actor.attemptsTo(Click.on(MembersObject.MEMBERS_TAB));
 		    waitABit(2000);			   
@@ -221,6 +234,73 @@ public class Members extends UIInteractions implements Task {
 			actor.attemptsTo(Click.on(OrganizationPage.DELETE_BTN));
 			waitABit(3000);
 			
+			break;
+			
+		case "DeleteMultiBulkData":
+			waitABit(5000);
+			String filepath = "C:\\workspace\\Drive_Health\\src\\test\\resources\\sources\\bullk_record.csv";
+			try {
+				CommonUtil.updateColumn(filepath, 11, orgName);
+			} catch (IOException | IllegalArgumentException e) {
+	            System.out.println("Error: " + e.getMessage());
+	        }
+			
+			waitABit(2000);
+			actor.attemptsTo(Enter.keyValues(orgName).into(OrganizationPage.ORG_SEARCH_INPUT));
+			
+			waitABit(2000);
+		    actor.attemptsTo(Click.on(OrganizationPage.ORG_NAME_LINK));
+		    
+		    waitABit(2000);
+		    actor.attemptsTo(Click.on(MembersObject.MEMBERS_BTN));
+		    
+		    waitABit(2000);
+		    actor.attemptsTo(Click.on(MembersObject.BULK_UPLOAD));
+		    
+		    waitABit(2000);
+		    actor.attemptsTo(Click.on(MembersObject.CLICK_TO_UPLOAD));
+		    
+		    waitABit(5000);
+		    
+		    try {
+				Robot rwRobot = new Robot();
+				StringSelection stringSelection = new StringSelection(filepath);
+				Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
+				rwRobot.keyPress(KeyEvent.VK_CONTROL);
+				rwRobot.keyPress(KeyEvent.VK_V);
+
+				rwRobot.keyRelease(KeyEvent.VK_CONTROL);
+				rwRobot.keyRelease(KeyEvent.VK_V);
+
+				rwRobot.keyPress(KeyEvent.VK_ENTER);
+				rwRobot.keyRelease(KeyEvent.VK_ENTER);
+			} catch (AWTException e) {
+
+				e.printStackTrace();
+			}
+		    
+		    waitABit(3000);
+		    actor.attemptsTo(Click.on(MembersObject.UPLOAD_BTN));
+		    			
+			  waitABit(5000);
+			  actor.attemptsTo(Click.on(MembersObject.MEMBERS_TAB));
+			  
+			  waitABit(2000);
+			  actor.attemptsTo(Click.on(MembersObject.SELECT_ALL));
+			  
+			  waitABit(2000);
+			  actor.attemptsTo(Click.on(MembersObject.DELETE_BULK));
+			  
+			  waitABit(2000);
+			  actor.attemptsTo(Click.on(OrganizationPage.DELETE_BTN));
+			  
+			  waitABit(2000);
+			  searchResult = MembersObject.SEARCH_RESULT_HIGHLIGHTED.resolveFor(actor).getText();
+			  			  
+			  CommonUtil.captureScreenshot(getDriver());
+			  
+			  actor.attemptsTo(Ensure.that(searchResult).isEqualToIgnoringCase("No results Found."));
+			 
 			break;
 		default:
 			System.out.println("No action");

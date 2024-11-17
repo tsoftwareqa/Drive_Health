@@ -37,6 +37,14 @@ Feature: Manage crud operations for organization and sub organization
         | EditSub |
     Then verify updated sub organization
 
+@SmokeTest1
+  Scenario: verify delete multi members added via bulk upload
+    Given user is on Home page of application and login
+    When navigate to member tab select all member and delete
+        | Action              |
+        | DeleteMultiBulkData |
+    Then verify all deleted member in organization
+    
 @SmokeTest
   Scenario: verify add member and save
     Given user is on Home page of application and login
@@ -69,7 +77,7 @@ Feature: Manage crud operations for organization and sub organization
         | Edit   |
     Then verify updated staff in organization
   
-@SmokeTest1
+@SmokeTest
   Scenario: verify add member via bulk upload
     Given user is on Home page of application and login
     When add member via bulk upload
@@ -77,12 +85,12 @@ Feature: Manage crud operations for organization and sub organization
         | AddBulk |
     Then verify added member via bulk in organization  
      
-@SmokeTest1
-  Scenario: delete member and verify
+@SmokeTest
+  Scenario: delete single member added via bulk upload and verify
     Given user is on Home page of application and login
     When click on three dot icon and delete member added via bulk
-        | Action     |
-        | Deletebulk |
+        | Action               |
+        | DeleteSinglebulkData |
     Then verify deleted member added via bulk
     
 @SmokeTest
@@ -92,7 +100,7 @@ Feature: Manage crud operations for organization and sub organization
     Then verify upload history
     
 @SmokeTest
-  Scenario: delete member and verify
+  Scenario: verify delete member added manually
     Given user is on Home page of application and login
     When click on three dot icon and delete member
         | Action |

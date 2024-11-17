@@ -1,6 +1,9 @@
 package com.drivehealth.test.utils;
 
 import com.ibm.icu.text.SimpleDateFormat;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvValidationException;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -10,10 +13,17 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.io.FileHandler;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
 
@@ -141,4 +151,81 @@ public class CommonUtil {
 		}
 		return sb.toString();
 	}
+	
+	public static void writeAtPosition(String filePath, int rowNum, int colNum, String newData) throws IOException {
+        // Step 1: Read the existing CSV into memory
+        List<String[]> rows = new ArrayList<>();
+        
+        try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
+            String[] row;
+            try {
+				while ((row = reader.readNext()) != null) {
+				    rows.add(row);
+				}
+			} catch (CsvValidationException | IOException e) {
+				e.printStackTrace();
+			}
+        }
+
+        // Step 2: Check if the row and column positions are valid
+        if (rowNum >= rows.size() || rowNum < 0) {
+            throw new IllegalArgumentException("Row number is out of range.");
+        }
+        String[] targetRow = rows.get(rowNum);
+        if (colNum >= targetRow.length || colNum < 0) {
+            throw new IllegalArgumentException("Column number is out of range.");
+        }
+
+        // Step 3: Modify the specific cell with the new data
+        targetRow[colNum] = newData;
+
+        // Step 4: Write the updated data back to the CSV file
+        try (CSVWriter writer = new CSVWriter(new FileWriter(filePath))) {
+            writer.writeAll(rows);
+        }
+    }
+	
+	// Method to update all rows in a specific column
+    public static void updateColumn(String filePath, int colNum, String newData) throws IOException {
+        // Step 1: Read the existing CSV into memory
+        List<List<String>> rows = new ArrayList<>();
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] columns = line.split(",");
+                rows.add(new ArrayList<>(Arrays.asList(columns)));
+            }
+        }
+
+        // Step 2: Check if the column number is valid
+        if (colNum < 0 || colNum >= rows.get(0).size()) {
+            throw new IllegalArgumentException("Column number is out of range.");
+        }
+
+        // Step 3: Update the specified column in all rows
+        for (List<String> row : rows) {
+            row.set(colNum, newData);
+        }
+
+        // Step 4: Write the updated data back to the CSV file
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+            for (List<String> row : rows) {
+                bw.write(String.join(",", row));
+                bw.newLine();
+            }
+        }
+    }
+	
+	/*
+	 * public static void main(String[] args) { String filePath =
+	 * "C:\\workspace\\Drive_Health\\src\\test\\resources\\sources\\bullk_record.csv";
+	 * 
+	 * try { // Example: Modify the data at row 1, column 2 (0-based index)
+	 * updateColumn(filePath, 11, "Updated1 Value");
+	 * System.out.println("CSV updated successfully!"); } catch (IOException |
+	 * IllegalArgumentException e) { System.out.println("Error: " + e.getMessage());
+	 * } }
+	 */
+
 }

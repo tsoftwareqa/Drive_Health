@@ -143,6 +143,7 @@ public class DriveHealthSteps extends UIInteractionSteps{
 		}
 	}
 	
+	@When("navigate to member tab select all member and delete")
 	@When("click on three dot icon and delete member added via bulk")
 	@When("add member via bulk upload")
 	@When("click on three dot icon and delete member")
@@ -173,6 +174,14 @@ public class DriveHealthSteps extends UIInteractionSteps{
 			givenThat(user).attemptsTo(Ensure.that(searchResult).isBlank());
 			System.out.println("Member Deleted successfully");
 		}
+	}
+	
+	@Then("verify all deleted member in organization")
+	public void verify_all_deleted_member_in_organization() {
+		 String searchData = MembersObject.SEARCH_RESULT_HIGHLIGHTED.resolveFor(user).getText(); 
+		  CommonUtil.captureScreenshot(getDriver());	  
+		  givenThat(user).attemptsTo(Ensure.that(searchData).isEqualToIgnoringCase("No results Found."));
+		 
 	}
 	
 	@When("click on three dot icon and delete staff")

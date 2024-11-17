@@ -56,6 +56,12 @@ public class MembersObject extends PageObject {
 	public static Target SEARCH_RESULT_HIGHLIGHTED = Target.the("search result").locatedBy(
 			"(//span[@class='_Highlighted_18z0f_1'])[1]");
 	
+	public static Target SELECT_ALL = Target.the("select all").locatedBy(
+			"//button[@aria-label='Select all']");
+	
+	public static Target DELETE_BULK = Target.the("delete").locatedBy(
+			"//div[contains(text(),'Delete')]");
+	
 	public void getElement() {
 		List<WebElement> element =  getDriver().findElements(By.xpath("//ul[@class='w-full']/descendant::span"));
 		element.get(1).click();
