@@ -282,7 +282,7 @@ public class Members extends UIInteractions implements Task {
 		    waitABit(3000);
 		    actor.attemptsTo(Click.on(MembersObject.UPLOAD_BTN));
 		    			
-			  waitABit(5000);
+			  waitABit(8000);
 			  actor.attemptsTo(Click.on(MembersObject.MEMBERS_TAB));
 			  
 			  waitABit(2000);
@@ -295,12 +295,15 @@ public class Members extends UIInteractions implements Task {
 			  actor.attemptsTo(Click.on(OrganizationPage.DELETE_BTN));
 			  
 			  waitABit(2000);
-			  searchResult = MembersObject.SEARCH_RESULT_HIGHLIGHTED.resolveFor(actor).getText();
-			  			  
-			  CommonUtil.captureScreenshot(getDriver());
+              actor.attemptsTo(Click.on(MembersObject.SELECT_ALL));
 			  
-			  actor.attemptsTo(Ensure.that(searchResult).isEqualToIgnoringCase("No results Found."));
-			 
+			  waitABit(2000);
+			  actor.attemptsTo(Click.on(MembersObject.DELETE_BULK));
+			  
+			  waitABit(2000);
+			  actor.attemptsTo(Click.on(OrganizationPage.DELETE_BTN));
+			  waitABit(4000);
+			  
 			break;
 		default:
 			System.out.println("No action");

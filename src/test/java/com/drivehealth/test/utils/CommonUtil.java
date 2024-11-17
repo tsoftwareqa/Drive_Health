@@ -203,29 +203,34 @@ public class CommonUtil {
             throw new IllegalArgumentException("Column number is out of range.");
         }
 
-        // Step 3: Update the specified column in all rows
-        for (List<String> row : rows) {
-            row.set(colNum, newData);
+       // Step 3: Update the specified column in all rows except the first (header)
+        for (int i = 1; i < rows.size(); i++) {  // Start from row 1 to skip the header (row 0)
+            List<String> row = rows.get(i);
+            row.set(colNum, newData.concat(","));  // Update the column with new data
         }
 
         // Step 4: Write the updated data back to the CSV file
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
-            for (List<String> row : rows) {
-                bw.write(String.join(",", row));
-                bw.newLine();
+            for (int i = 0; i < rows.size(); i++) {
+                String rowString = String.join(",", rows.get(i));
+                bw.write(rowString);
+                // Avoid adding an extra line at the end
+                if (i < rows.size() - 1) {
+                    bw.newLine(); // Add a new line after every row except the last one
+                }
             }
         }
     }
 	
-	/*
-	 * public static void main(String[] args) { String filePath =
-	 * "C:\\workspace\\Drive_Health\\src\\test\\resources\\sources\\bullk_record.csv";
-	 * 
-	 * try { // Example: Modify the data at row 1, column 2 (0-based index)
-	 * updateColumn(filePath, 11, "Updated1 Value");
-	 * System.out.println("CSV updated successfully!"); } catch (IOException |
-	 * IllegalArgumentException e) { System.out.println("Error: " + e.getMessage());
-	 * } }
-	 */
+	
+	  public static void main(String[] args) { String filePath =
+	  "C:\\workspace\\Drive_Health\\src\\test\\resources\\sources\\bullk_record.csv";
+	  
+	  try { // Example: Modify the data at row 1, column 2 (0-based index)
+	  updateColumn(filePath, 11, "AUTO_ORG_CNFOY");
+	  System.out.println("CSV updated successfully!"); } catch (IOException |
+	  IllegalArgumentException e) { System.out.println("Error: " + e.getMessage());
+	  } }
+	 
 
 }

@@ -178,9 +178,10 @@ public class DriveHealthSteps extends UIInteractionSteps{
 	
 	@Then("verify all deleted member in organization")
 	public void verify_all_deleted_member_in_organization() {
-		 String searchData = MembersObject.SEARCH_RESULT_HIGHLIGHTED.resolveFor(user).getText(); 
-		  CommonUtil.captureScreenshot(getDriver());	  
-		  givenThat(user).attemptsTo(Ensure.that(searchData).isEqualToIgnoringCase("No results Found."));
+		 String searchData = MembersObject.NO_RESULT.resolveFor(user).getText(); 
+		 CommonUtil.captureScreenshot(getDriver());
+		 waitABit(2000);
+		 givenThat(user).attemptsTo(Ensure.that(searchData).isEqualToIgnoringCase("No results Found."));
 		 
 	}
 	

@@ -62,6 +62,9 @@ public class MembersObject extends PageObject {
 	public static Target DELETE_BULK = Target.the("delete").locatedBy(
 			"//div[contains(text(),'Delete')]");
 	
+	public static Target NO_RESULT = Target.the("no result").locatedBy(
+			"//td[@class='p-1 align-middle [&:has([role=checkbox])]:pr-0 h-10 text-center']");
+	
 	public void getElement() {
 		List<WebElement> element =  getDriver().findElements(By.xpath("//ul[@class='w-full']/descendant::span"));
 		element.get(1).click();

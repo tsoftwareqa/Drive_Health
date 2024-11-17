@@ -1,16 +1,16 @@
-email,first_name,last_name,nickname,phone_number,address_line,zip,state,city,date_of_birth,gender_at_birth,Updated1 Value,user_sub_organisation
-test1@gmail.com,FirstB,LastB,FLB,7034782312,shirley ave,35201,,,12-10-1990,Male,Updated1 Value
-test2@gmail.com,FirstB,LastB,FLB,7034782313,shirley ave,35201,,,12-10-1990,Male,Updated1 Value
-test3@gmail.com,FirstB,LastB,FLB,7034782314,shirley ave,35201,,,12-10-1990,Male,Updated1 Value
-test4@gmail.com,FirstB,LastB,FLB,7034782315,shirley ave,35201,,,12-10-1990,Male,Updated1 Value
-test5@gmail.com,FirstB,LastB,FLB,7034782316,shirley ave,35201,,,12-10-1990,Male,Updated1 Value
-test6@gmail.com,FirstB,LastB,FLB,7034782317,shirley ave,35201,,,12-10-1990,Male,Updated1 Value
-test7@gmail.com,FirstB,LastB,FLB,7034782318,shirley ave,35201,,,12-10-1990,Male,Updated1 Value
-test8@gmail.com,FirstB,LastB,FLB,7034782319,shirley ave,35201,,,12-10-1990,Male,Updated1 Value
-test9@gmail.com,FirstB,LastB,FLB,7034782320,shirley ave,35201,,,12-10-1990,Male,Updated1 Value
-test10@gmail.com,FirstB,LastB,FLB,7034782321,shirley ave,35201,,,12-10-1990,Male,Updated1 Value
-test11@gmail.com,FirstB,LastB,FLB,7034782322,shirley ave,35201,,,12-10-1990,Male,Updated1 Value
-test12@gmail.com,FirstB,LastB,FLB,7034782323,shirley ave,35201,,,12-10-1990,Male,Updated1 Value
-test13@gmail.com,FirstB,LastB,FLB,7034782324,shirley ave,35201,,,12-10-1990,Male,Updated1 Value
-test14@gmail.com,FirstB,LastB,FLB,7034782325,shirley ave,35201,,,12-10-1990,Male,Updated1 Value
-test5@gmail.com,FirstB,LastB,FLB,7034782326,shirley ave,35201,,,12-10-1990,Male,Updated1 Value
+email,first_name,last_name,nickname,phone_number,address_line,zip,state,city,date_of_birth,gender_at_birth,organisation,user_sub_organisation
+test1@gmail.com,FirstB,LastB,FLB,7034782312,shirley ave,35201,,,12-10-1990,Male,AUTO_ORG_CNFOY,
+test2@gmail.com,FirstB,LastB,FLB,7034782313,shirley ave,35201,,,12-10-1990,Male,AUTO_ORG_CNFOY,
+test3@gmail.com,FirstB,LastB,FLB,7034782314,shirley ave,35201,,,12-10-1990,Male,AUTO_ORG_CNFOY,
+test4@gmail.com,FirstB,LastB,FLB,7034782315,shirley ave,35201,,,12-10-1990,Male,AUTO_ORG_CNFOY,
+test5@gmail.com,FirstB,LastB,FLB,7034782316,shirley ave,35201,,,12-10-1990,Male,AUTO_ORG_CNFOY,
+test6@gmail.com,FirstB,LastB,FLB,7034782317,shirley ave,35201,,,12-10-1990,Male,AUTO_ORG_CNFOY,
+test7@gmail.com,FirstB,LastB,FLB,7034782318,shirley ave,35201,,,12-10-1990,Male,AUTO_ORG_CNFOY,
+test8@gmail.com,FirstB,LastB,FLB,7034782319,shirley ave,35201,,,12-10-1990,Male,AUTO_ORG_CNFOY,
+test9@gmail.com,FirstB,LastB,FLB,7034782320,shirley ave,35201,,,12-10-1990,Male,AUTO_ORG_CNFOY,
+test10@gmail.com,FirstB,LastB,FLB,7034782321,shirley ave,35201,,,12-10-1990,Male,AUTO_ORG_CNFOY,
+test11@gmail.com,FirstB,LastB,FLB,7034782322,shirley ave,35201,,,12-10-1990,Male,AUTO_ORG_CNFOY,
+test12@gmail.com,FirstB,LastB,FLB,7034782323,shirley ave,35201,,,12-10-1990,Male,AUTO_ORG_CNFOY,
+test13@gmail.com,FirstB,LastB,FLB,7034782324,shirley ave,35201,,,12-10-1990,Male,AUTO_ORG_CNFOY,
+test14@gmail.com,FirstB,LastB,FLB,7034782325,shirley ave,35201,,,12-10-1990,Male,AUTO_ORG_CNFOY,
+test15@gmail.com,FirstB,LastB,FLB,7034782326,shirley ave,35201,,,12-10-1990,Male,AUTO_ORG_CNFOY,
