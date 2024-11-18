@@ -24,6 +24,7 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.actions.Clear;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import net.serenitybdd.screenplay.actions.Scroll;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.ensure.Ensure;
 import net.thucydides.model.util.EnvironmentVariables;
@@ -143,6 +144,7 @@ public class DriveHealthSteps extends UIInteractionSteps{
 		}
 	}
 	
+	@When("navigate to member tab add members in bulk")
 	@When("navigate to member tab select all member and delete")
 	@When("click on three dot icon and delete member added via bulk")
 	@When("add member via bulk upload")
@@ -174,6 +176,18 @@ public class DriveHealthSteps extends UIInteractionSteps{
 			givenThat(user).attemptsTo(Ensure.that(searchResult).isBlank());
 			System.out.println("Member Deleted successfully");
 		}
+	}
+	
+	@Then("verify pagination by navigating to next page")
+	public void verify_pagination_by_navigating_to_next_page() {
+		 givenThat(user).attemptsTo(Scroll.to(MembersObject.NEXT_PAGE).andAlignToBottom());
+		 waitABit(2000);
+		 givenThat(user).attemptsTo(Click.on(MembersObject.NEXT_PAGE));
+		 String searchData = MembersObject.PAGE_VALUE.resolveFor(user).getText(); 
+		 CommonUtil.captureScreenshot(getDriver());
+		 waitABit(2000);
+		 givenThat(user).attemptsTo(Ensure.that(searchData).isEqualToIgnoringCase("Page 2 of 2"));
+		 
 	}
 	
 	@Then("verify all deleted member in organization")

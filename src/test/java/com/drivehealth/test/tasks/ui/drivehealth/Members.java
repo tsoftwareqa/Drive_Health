@@ -236,7 +236,7 @@ public class Members extends UIInteractions implements Task {
 			
 			break;
 			
-		case "DeleteMultiBulkData":
+		case "VerifyPagination":
 			waitABit(5000);
 			String filepath = "C:\\workspace\\Drive_Health\\src\\test\\resources\\sources\\bullk_record.csv";
 			try {
@@ -282,27 +282,39 @@ public class Members extends UIInteractions implements Task {
 		    waitABit(3000);
 		    actor.attemptsTo(Click.on(MembersObject.UPLOAD_BTN));
 		    			
-			  waitABit(8000);
-			  actor.attemptsTo(Click.on(MembersObject.MEMBERS_TAB));
+			waitABit(8000);
+			actor.attemptsTo(Click.on(MembersObject.MEMBERS_TAB));
+			waitABit(2000);    
+			break;
+			
+		case "DeleteMultiBulkData":
+			waitABit(5000);
+			actor.attemptsTo(Enter.keyValues(orgName).into(OrganizationPage.ORG_SEARCH_INPUT));
+			
+			waitABit(2000);
+		    actor.attemptsTo(Click.on(OrganizationPage.ORG_NAME_LINK));
+		     
+		    waitABit(2000);
+			actor.attemptsTo(Click.on(MembersObject.MEMBERS_TAB));
 			  
-			  waitABit(2000);
-			  actor.attemptsTo(Click.on(MembersObject.SELECT_ALL));
+			waitABit(2000);
+		    actor.attemptsTo(Click.on(MembersObject.SELECT_ALL));
 			  
-			  waitABit(2000);
-			  actor.attemptsTo(Click.on(MembersObject.DELETE_BULK));
+			waitABit(2000);
+			actor.attemptsTo(Click.on(MembersObject.DELETE_BULK));
 			  
-			  waitABit(2000);
-			  actor.attemptsTo(Click.on(OrganizationPage.DELETE_BTN));
+			waitABit(2000);
+			actor.attemptsTo(Click.on(OrganizationPage.DELETE_BTN));
 			  
-			  waitABit(2000);
-              actor.attemptsTo(Click.on(MembersObject.SELECT_ALL));
+			waitABit(2000);
+            actor.attemptsTo(Click.on(MembersObject.SELECT_ALL));
 			  
-			  waitABit(2000);
-			  actor.attemptsTo(Click.on(MembersObject.DELETE_BULK));
+			waitABit(2000);
+			actor.attemptsTo(Click.on(MembersObject.DELETE_BULK));
 			  
-			  waitABit(2000);
-			  actor.attemptsTo(Click.on(OrganizationPage.DELETE_BTN));
-			  waitABit(4000);
+			waitABit(2000);
+			actor.attemptsTo(Click.on(OrganizationPage.DELETE_BTN));
+			waitABit(4000);
 			  
 			break;
 		default:

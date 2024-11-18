@@ -65,6 +65,12 @@ public class MembersObject extends PageObject {
 	public static Target NO_RESULT = Target.the("no result").locatedBy(
 			"//td[@class='p-1 align-middle [&:has([role=checkbox])]:pr-0 h-10 text-center']");
 	
+	public static Target NEXT_PAGE = Target.the("next page").locatedBy(
+			"(//button[@class='inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input text-primary bg-background hover:bg-accent hover:text-accent-foreground h-8 w-8 p-0'])[2]");
+	
+	public static Target PAGE_VALUE = Target.the("page value").locatedBy(
+			"//div[@class='flex w-[100px] items-center justify-center text-sm font-medium']");
+	
 	public void getElement() {
 		List<WebElement> element =  getDriver().findElements(By.xpath("//ul[@class='w-full']/descendant::span"));
 		element.get(1).click();

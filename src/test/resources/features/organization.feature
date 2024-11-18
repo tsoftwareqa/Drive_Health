@@ -38,6 +38,14 @@ Feature: Manage crud operations for organization and sub organization
     Then verify updated sub organization
 
 @SmokeTest1
+  Scenario: verify pagination on members added via bulk upload
+    Given user is on Home page of application and login
+    When navigate to member tab add members in bulk
+        | Action           |
+        | VerifyPagination |
+    Then verify pagination by navigating to next page
+    
+@SmokeTest1
   Scenario: verify delete multi members added via bulk upload
     Given user is on Home page of application and login
     When navigate to member tab select all member and delete
