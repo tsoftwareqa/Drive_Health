@@ -6,15 +6,18 @@ import java.util.logging.Logger;
 import com.drivehealth.test.page_objects.HomePage;
 import com.drivehealth.test.page_objects.MembersObject;
 import com.drivehealth.test.page_objects.OrganizationPage;
+import com.drivehealth.test.page_objects.SettingsObject;
 import com.drivehealth.test.page_objects.StaffObjects;
 import com.drivehealth.test.tasks.ui.common.Login;
 import com.drivehealth.test.tasks.ui.drivehealth.Members;
 import com.drivehealth.test.tasks.ui.drivehealth.Organization;
+import com.drivehealth.test.tasks.ui.drivehealth.Settings;
 import com.drivehealth.test.tasks.ui.drivehealth.Staff;
 import com.drivehealth.test.utils.CommonUtil;
 import com.drivehealth.test.utils.DataHelper;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.Before;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -264,5 +267,31 @@ public class DriveHealthSteps extends UIInteractionSteps{
 		CommonUtil.captureScreenshot(getDriver());
 		givenThat(user).attemptsTo(Ensure.that(fileName).isEqualTo("sample_bullk_upload.csv"));
 		givenThat(user).attemptsTo(Ensure.that(successCount).isEqualTo("1 Success"));
+	}
+	
+	//Ovation setting steps
+	
+	@And("navigate to settings page")
+	public void navigate_to_settings_page() {
+		givenThat(user).attemptsTo(Click.on(HomePage.DOWN_ARROW));
+		givenThat(user).attemptsTo(Click.on(SettingsObject.SETTINGS));
+	}
+	
+	@When("fill details for time window workflow call and save")
+	public void fill_details_for_time_window_workflow_call_and_save(DataTable setting) {
+		givenThat(user).attemptsTo(Settings.fromUnderlineDetails(setting));
+	}
+	
+	@Then("verify saved ovation settings")
+	public void verify_saved_ovation_settings() {
+		waitABit(3000);
+		String initialCall = SettingsObject.INITIAL_CALL.resolveFor(user).getAttribute("value");
+		String retryCall = SettingsObject.RETRY_CALL.resolveFor(user).getAttribute("value");
+		String hours = SettingsObject.HOURS.resolveFor(user).getAttribute("value");
+		String days = SettingsObject.DAYS.resolveFor(user).getAttribute("value");
+		givenThat(user).attemptsTo(Ensure.that(initialCall).isEqualTo("02"));
+		givenThat(user).attemptsTo(Ensure.that(retryCall).isEqualTo("01"));
+		givenThat(user).attemptsTo(Ensure.that(hours).isEqualTo("03"));
+		givenThat(user).attemptsTo(Ensure.that(days).isEqualTo("05"));
 	}
 }

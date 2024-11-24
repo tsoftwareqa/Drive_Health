@@ -8,10 +8,10 @@ import net.serenitybdd.cucumber.CucumberWithSerenity;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
-        features = {"src/test/resources/features/organization.feature"},
+        features = {"src/test/resources/features/settings.feature"},
         plugin = {"pretty"},
         glue = {"com.drivehealth.test"},
-        tags = "@SmokeTest1",
+        tags = "@SmokeTest",
         dryRun = false)
 
 public class DriveHealthRunner {
