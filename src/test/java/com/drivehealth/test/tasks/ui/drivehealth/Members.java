@@ -317,6 +317,29 @@ public class Members extends UIInteractions implements Task {
 			waitABit(4000);
 			  
 			break;
+			
+		case "GenReport":
+			waitABit(6000);
+			actor.attemptsTo(Enter.keyValues(orgName).into(OrganizationPage.ORG_SEARCH_INPUT));
+			waitABit(2000);
+			
+		    actor.attemptsTo(Click.on(OrganizationPage.ORG_NAME_LINK));
+		    waitABit(2000);
+		    
+		    actor.attemptsTo(Click.on(MembersObject.MEMBERS_TAB));
+		    waitABit(2000);
+		    
+		    actor.attemptsTo(Click.on(MembersObject.MEMBER_LINK));
+		    waitABit(2000);
+		    
+		    actor.attemptsTo(Click.on(MembersObject.GEN_REPORT_BTN));
+		    waitABit(2000);
+		    
+		    actor.attemptsTo(Click.on(MembersObject.GENERATE_REPORT_BTN));
+		    waitABit(5000);
+		    
+		   break;
+		   
 		default:
 			System.out.println("No action");
 			break;

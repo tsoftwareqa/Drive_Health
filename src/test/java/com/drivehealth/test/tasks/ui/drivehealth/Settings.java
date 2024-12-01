@@ -2,6 +2,8 @@ package com.drivehealth.test.tasks.ui.drivehealth;
 
 import java.util.Map;
 
+import org.openqa.selenium.JavascriptExecutor;
+
 import com.drivehealth.test.page_objects.MembersObject;
 import com.drivehealth.test.page_objects.OrganizationPage;
 import com.drivehealth.test.page_objects.SettingsObject;
@@ -19,6 +21,7 @@ import net.serenitybdd.screenplay.actions.SelectFromOptions;
 public class Settings extends UIInteractions implements Task {
 
 	private static String action;
+	SettingsObject setobj;
 
 	public Settings(String action) {
 		this.action = action;
@@ -37,31 +40,12 @@ public class Settings extends UIInteractions implements Task {
 		switch (action) {
 		case "Save":
 			waitABit(3000);
-						
-			actor.attemptsTo(Click.on(SettingsObject.FROM_CROSS_ICON));
-			waitABit(2000);
-						
-			actor.attemptsTo(Enter.keyValues("01").into(SettingsObject.FROM_TIME));
+			actor.attemptsTo(Click.on(SettingsObject.ORG_NAME));
 			waitABit(2000);
 			
 			actor.attemptsTo(Enter.keyValues("40").into(SettingsObject.FROM_MINUTE));
 			waitABit(2000);
-			
-			actor.attemptsTo(SelectFromOptions.byIndex(0).from(SettingsObject.FROM_AM_PM));
-			waitABit(2000);
-			
-			actor.attemptsTo(Click.on(SettingsObject.TO_CROSS_ICON));
-			waitABit(2000);
 						
-			actor.attemptsTo(Enter.keyValues("10").into(SettingsObject.TO_TIME));
-			waitABit(2000);
-			
-			actor.attemptsTo(Enter.keyValues("50").into(SettingsObject.TO_MINUTE));
-			waitABit(2000);
-			
-			actor.attemptsTo(SelectFromOptions.byIndex(1).from(SettingsObject.FROM_AM_PM));
-			waitABit(2000);
-			
 			actor.attemptsTo(Click.on(SettingsObject.TIME_WIN_SAVE_BTN));
 			waitABit(2000);
 			
@@ -69,27 +53,27 @@ public class Settings extends UIInteractions implements Task {
 			waitABit(2000);
 			
 			actor.attemptsTo(Click.on(SettingsObject.WORKFLOW_CALL_RESET_BTN));
-			waitABit(2000);
+			waitABit(5000);
 			
-			actor.attemptsTo(Clear.field(SettingsObject.INITIAL_CALL));
+			setobj.clearInitialCallField();
 			waitABit(2000);
 			
 			actor.attemptsTo(Enter.keyValues("02").into(SettingsObject.INITIAL_CALL));
 			waitABit(2000);
 			
-			actor.attemptsTo(Clear.field(SettingsObject.RETRY_CALL));
+			setobj.clearRetryTimesField();
 			waitABit(2000);
 			
 			actor.attemptsTo(Enter.keyValues("01").into(SettingsObject.RETRY_CALL));
 			waitABit(2000);
 			
-			actor.attemptsTo(Clear.field(SettingsObject.HOURS));
+			setobj.clearRetryHourField();
 			waitABit(2000);
 			
 			actor.attemptsTo(Enter.keyValues("03").into(SettingsObject.HOURS));
 			waitABit(2000);
 			
-			actor.attemptsTo(Clear.field(SettingsObject.DAYS));
+			setobj.clearRetryDaysField();
 			waitABit(2000);
 			
 			actor.attemptsTo(Enter.keyValues("05").into(SettingsObject.DAYS));

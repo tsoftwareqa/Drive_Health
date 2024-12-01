@@ -71,6 +71,16 @@ public class MembersObject extends PageObject {
 	public static Target PAGE_VALUE = Target.the("page value").locatedBy(
 			"//div[@class='flex w-[100px] items-center justify-center text-sm font-medium']");
 	
+	public static Target MEMBER_LINK = Target.the("member link").locatedBy(
+			"(//span[@class='_Highlighted_18z0f_1'])[1]");
+	
+	public static Target GEN_REPORT_BTN = Target.the("gen report btn").locatedBy(
+			"//button[contains(text(),'Generate Report')]");
+	
+	public static Target GENERATE_REPORT_BTN = Target.the("generate report btn").locatedBy(
+			"(//button[contains(text(),'Generate Report')])[2]");
+	
+	
 	public void getElement() {
 		List<WebElement> element =  getDriver().findElements(By.xpath("//ul[@class='w-full']/descendant::span"));
 		element.get(1).click();

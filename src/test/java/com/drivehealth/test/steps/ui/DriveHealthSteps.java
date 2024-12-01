@@ -147,6 +147,7 @@ public class DriveHealthSteps extends UIInteractionSteps{
 		}
 	}
 	
+	@When("navigate to member page and generate report")
 	@When("navigate to member tab add members in bulk")
 	@When("navigate to member tab select all member and delete")
 	@When("click on three dot icon and delete member added via bulk")
@@ -293,5 +294,10 @@ public class DriveHealthSteps extends UIInteractionSteps{
 		givenThat(user).attemptsTo(Ensure.that(retryCall).isEqualTo("01"));
 		givenThat(user).attemptsTo(Ensure.that(hours).isEqualTo("03"));
 		givenThat(user).attemptsTo(Ensure.that(days).isEqualTo("05"));
+	}
+	
+	@Then("verify generated report for member")
+	public void verify_generated_report_for_member() {
+		
 	}
 }

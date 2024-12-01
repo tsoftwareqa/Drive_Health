@@ -64,12 +64,6 @@ public class OrganizationPage extends PageObject {
 		return findAll(ALL_ORG).stream().map(WebElementFacade::getText).collect(Collectors.toList());
 	}
 
-	public void getElements() {
-		List<WebElement> element =  getDriver().findElements(By.xpath("//div[@data-state='closed']/child::button"));
-		((JavascriptExecutor) getDriver()).executeScript(
-	            "arguments[0].scrollIntoView();", element.get(element.size()-1));
-		    element.get(element.size()-1).click();
-		   }
 	
 	public void getElement() {
 		List<WebElement> element =  getDriver().findElements(By.xpath("//div[@data-state='closed']/child::button"));

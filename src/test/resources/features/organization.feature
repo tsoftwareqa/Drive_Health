@@ -37,7 +37,7 @@ Feature: Manage crud operations for organization and sub organization
         | EditSub |
     Then verify updated sub organization
 
-@SmokeTest1
+@SmokeTest
   Scenario: verify pagination on members added via bulk upload
     Given user is on Home page of application and login
     When navigate to member tab add members in bulk
@@ -45,7 +45,7 @@ Feature: Manage crud operations for organization and sub organization
         | VerifyPagination |
     Then verify pagination by navigating to next page
     
-@SmokeTest1
+@SmokeTest
   Scenario: verify delete multi members added via bulk upload
     Given user is on Home page of application and login
     When navigate to member tab select all member and delete
@@ -60,6 +60,14 @@ Feature: Manage crud operations for organization and sub organization
         | Action |
         | Add    |
     Then verify added member in organization
+    
+@SmokeTest1
+  Scenario: verify generate report
+    Given user is on Home page of application and login
+    When navigate to member page and generate report
+        | Action    |  
+        | GenReport |
+    Then verify generated report for member
 
 @SmokeTest
   Scenario: verify edit member and save

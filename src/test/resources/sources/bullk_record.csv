@@ -1,4 +1,4 @@
-email,first_name,last_name,nickname,phone_number,address_line,zip,state,city,date_of_birth,gender_at_birth,organisation,user_sub_organisation
+email,first_name,last_name,nickname,phone_number,address_line,zip,state,city,date_of_birth,gender_at_birth,organization,user_sub_organization
 test1@gmail.com,FirstB,LastB,FLB,7034782312,shirley ave,35201,,,12-10-1990,Male,AUTO_ORG_CNFOY,
 test2@gmail.com,FirstB,LastB,FLB,7034782313,shirley ave,35201,,,12-10-1990,Male,AUTO_ORG_CNFOY,
 test3@gmail.com,FirstB,LastB,FLB,7034782314,shirley ave,35201,,,12-10-1990,Male,AUTO_ORG_CNFOY,
