@@ -60,8 +60,16 @@ Feature: Manage crud operations for organization and sub organization
         | Action |
         | Add    |
     Then verify added member in organization
-    
-@SmokeTest1
+
+@SmokeTest
+  Scenario: verify call member
+    Given user is on Home page of application and login
+    When navigate to member page and call
+        | Action |
+        | Call   |
+    Then verify call status
+     
+@SmokeTest
   Scenario: verify generate report
     Given user is on Home page of application and login
     When navigate to member page and generate report

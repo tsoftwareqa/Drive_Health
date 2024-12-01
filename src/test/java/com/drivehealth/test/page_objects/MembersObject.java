@@ -1,10 +1,14 @@
 package com.drivehealth.test.page_objects;
 
+import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.screenplay.targets.Target;
@@ -80,10 +84,47 @@ public class MembersObject extends PageObject {
 	public static Target GENERATE_REPORT_BTN = Target.the("generate report btn").locatedBy(
 			"(//button[contains(text(),'Generate Report')])[2]");
 	
+	public static Target CALL = Target.the("generate report btn").locatedBy(
+			"(//div[contains(text(),'Call')])[1]");
+	
+	public static Target CONFIRM_CALL = Target.the("confirm call").locatedBy(
+			"//button[contains(text(),'Confirm Call')]");
 	
 	public void getElement() {
 		List<WebElement> element =  getDriver().findElements(By.xpath("//ul[@class='w-full']/descendant::span"));
 		element.get(1).click();
    }
 	
+	public void downloadTest() throws InterruptedException {
+        ChromeOptions options = new ChromeOptions();
+        Map<String, Object> prefs = new HashMap<>();
+        prefs.put("download.default_directory", System.getProperty("user.dir")+"/src/test/resources/downloads");
+        options.setExperimentalOption("prefs", prefs);
+        getDriver();
+     }
+	
+	public boolean isFileAvailable(){
+        File folder = new File("C:\\Users\\Admin\\Downloads");
+        File[] listOfFiles = folder.listFiles();
+        boolean isFileAvailable = false;
+        for (File listOfFile : listOfFiles) {
+            if (listOfFile.isFile()) {
+                String fileName = listOfFile.getName();
+                System.out.println("File " + fileName);
+                if (fileName.equalsIgnoreCase("interaction_report.pdf")) {
+                    isFileAvailable = true;
+                }
+            }
+        }
+        return isFileAvailable;
+    }
+	
+	public void deleteFile() {
+		File myObj = new File("C:\\Users\\Admin\\Downloads\\interaction_report.pdf"); 
+	    if (myObj.delete()) { 
+	      System.out.println("file deleted successfully: " + myObj.getName());
+	    } else {
+	      System.out.println("Failed to delete the file.");
+	    }
+	}
 }

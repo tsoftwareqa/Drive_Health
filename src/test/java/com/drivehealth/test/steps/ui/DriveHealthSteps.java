@@ -147,6 +147,7 @@ public class DriveHealthSteps extends UIInteractionSteps{
 		}
 	}
 	
+	@When("navigate to member page and call")
 	@When("navigate to member page and generate report")
 	@When("navigate to member tab add members in bulk")
 	@When("navigate to member tab select all member and delete")
@@ -298,6 +299,11 @@ public class DriveHealthSteps extends UIInteractionSteps{
 	
 	@Then("verify generated report for member")
 	public void verify_generated_report_for_member() {
+		givenThat(user).attemptsTo(Ensure.that(membersObject.isFileAvailable()).isTrue());
+	}
+	
+	@Then("verify call status")
+	public void verify_call_status() {
 		
 	}
 }
