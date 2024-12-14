@@ -90,6 +90,15 @@ public class MembersObject extends PageObject {
 	public static Target CONFIRM_CALL = Target.the("confirm call").locatedBy(
 			"//button[contains(text(),'Confirm Call')]");
 	
+	public static Target GLOBAL_SEARCH_INPUT_FIELD = Target.the("global search input field").locatedBy(
+			"//input[@placeholder='Search for users']");
+	
+	public static Target SELECT_SEARCH_RESULT = Target.the("select search result").locatedBy(
+			"//span[@class='text-black-600']");
+	
+	public static Target SEARCH_HIGHLIGHTED_RESULT = Target.the("search result").locatedBy(
+			"(//span[@class='_Highlighted_18z0f_1'])[1]");
+	
 	public void getElement() {
 		List<WebElement> element =  getDriver().findElements(By.xpath("//ul[@class='w-full']/descendant::span"));
 		element.get(1).click();

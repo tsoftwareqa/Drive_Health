@@ -60,6 +60,12 @@ Feature: Manage crud operations for organization and sub organization
         | Action |
         | Add    |
     Then verify added member in organization
+    
+@SmokeTest1
+  Scenario: verify search member from global search
+    Given user is on Home page of application and login
+    When search member from global search
+    Then verify searched member result
 
 @SmokeTest
   Scenario: verify call member
