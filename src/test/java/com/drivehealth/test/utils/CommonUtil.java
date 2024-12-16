@@ -92,7 +92,7 @@ public class CommonUtil {
 	}
 
 	public static String getCurrentDate() {
-		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
 		Date date = new Date();
 		return formatter.format(date);
 	}
@@ -223,14 +223,9 @@ public class CommonUtil {
     }
 	
 	
-	  public static void main(String[] args) { String filePath =
-	  "C:\\workspace\\Drive_Health\\src\\test\\resources\\sources\\bullk_record.csv";
-	  
-	  try { // Example: Modify the data at row 1, column 2 (0-based index)
-	  updateColumn(filePath, 11, "AUTO_ORG_CNFOY");
-	  System.out.println("CSV updated successfully!"); } catch (IOException |
-	  IllegalArgumentException e) { System.out.println("Error: " + e.getMessage());
-	  } }
+	  public static void main(String[] args) { 
+		  System.out.println(CommonUtil.getCurrentDate());
+	  }
 	 
 
 }

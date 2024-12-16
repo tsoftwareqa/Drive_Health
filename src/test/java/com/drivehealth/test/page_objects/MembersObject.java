@@ -10,6 +10,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import com.drivehealth.test.utils.CommonUtil;
+
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.screenplay.targets.Target;
 
@@ -99,6 +101,12 @@ public class MembersObject extends PageObject {
 	public static Target SEARCH_HIGHLIGHTED_RESULT = Target.the("search result").locatedBy(
 			"(//span[@class='_Highlighted_18z0f_1'])[1]");
 	
+	public static Target DOWNLOAD_CSV = Target.the("download csv").locatedBy(
+			"//button[contains(text(),' Download CSV')]");
+	
+	public static Target SUCCESS_POPUP = Target.the("success popup").locatedBy(
+			"//p[@class='text-[19px] text[#000000] font-bold mb-3 capitalize']");
+	
 	public void getElement() {
 		List<WebElement> element =  getDriver().findElements(By.xpath("//ul[@class='w-full']/descendant::span"));
 		element.get(1).click();
@@ -115,6 +123,7 @@ public class MembersObject extends PageObject {
 	public boolean isFileAvailable(){
         File folder = new File("C:\\Users\\Admin\\Downloads");
         File[] listOfFiles = folder.listFiles();
+        String memberfilename = "Organisation_Members_List_"+CommonUtil.getCurrentDate();
         boolean isFileAvailable = false;
         for (File listOfFile : listOfFiles) {
             if (listOfFile.isFile()) {
@@ -122,6 +131,8 @@ public class MembersObject extends PageObject {
                 System.out.println("File " + fileName);
                 if (fileName.equalsIgnoreCase("interaction_report.pdf")) {
                     isFileAvailable = true;
+                }else if(fileName.equalsIgnoreCase(memberfilename)) {
+                	isFileAvailable = true;
                 }
             }
         }

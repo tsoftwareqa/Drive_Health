@@ -45,6 +45,14 @@ Feature: Manage crud operations for organization and sub organization
         | VerifyPagination |
     Then verify pagination by navigating to next page
     
+@SmokeTest1
+  Scenario: verify download members on member tab
+    Given user is on Home page of application and login
+    When navigate to member tab and click on download csv button
+        | Action      |
+        | DownloadCSV | 
+    Then verify download csv file
+    
 @SmokeTest
   Scenario: verify delete multi members added via bulk upload
     Given user is on Home page of application and login
@@ -61,7 +69,7 @@ Feature: Manage crud operations for organization and sub organization
         | Add    |
     Then verify added member in organization
     
-@SmokeTest1
+@SmokeTest
   Scenario: verify search member from global search
     Given user is on Home page of application and login
     When search member from global search

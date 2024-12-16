@@ -365,6 +365,22 @@ public class Members extends UIInteractions implements Task {
 		    
 		   break;
 		   
+		case "DownloadCSV":
+			waitABit(6000);
+			actor.attemptsTo(Enter.keyValues(orgName).into(OrganizationPage.ORG_SEARCH_INPUT));
+			waitABit(2000);
+			
+		    actor.attemptsTo(Click.on(OrganizationPage.ORG_NAME_LINK));
+		    waitABit(2000);
+		    
+		    actor.attemptsTo(Click.on(MembersObject.MEMBERS_TAB));
+		    waitABit(2000);
+		    
+		    actor.attemptsTo(Click.on(MembersObject.DOWNLOAD_CSV));
+		    waitABit(2000);
+		    
+		    break;
+		    
 		default:
 			System.out.println("No action");
 			break;

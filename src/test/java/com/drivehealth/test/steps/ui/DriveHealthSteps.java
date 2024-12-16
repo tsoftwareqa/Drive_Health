@@ -325,4 +325,20 @@ public class DriveHealthSteps extends UIInteractionSteps {
 		CommonUtil.captureScreenshot(getDriver());
 		givenThat(user).attemptsTo(Ensure.that(searchResult).containsIgnoringCase(member_first_name));
 	}
+	
+	@When("navigate to member tab and click on download csv button")
+	public void navigate_to_member_tab_and_click_on_download_csv_button(DataTable download) {
+		givenThat(user).attemptsTo(Members.fromUnderlineDetails(download));
+	}
+	
+	@Then("verify download csv file")
+	public void verify_download_csv_file() {
+		waitABit(2000);
+		String successmsg = MembersObject.SUCCESS_POPUP.resolveFor(user).getText();
+		waitABit(3000);
+		givenThat(user).attemptsTo(Ensure.that(membersObject.isFileAvailable()).isTrue());
+		waitABit(3000);
+		CommonUtil.captureScreenshot(getDriver());
+		givenThat(user).attemptsTo(Ensure.that(successmsg).containsIgnoringCase("Download CSV Successfully"));
+	}
 }
