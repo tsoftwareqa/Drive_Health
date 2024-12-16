@@ -8,6 +8,7 @@ import com.drivehealth.test.page_objects.StaffObjects;
 import com.drivehealth.test.utils.CommonUtil;
 import com.drivehealth.test.utils.ConvertCucumberDataTable;
 import com.drivehealth.test.utils.DataHelper;
+import com.drivehealth.test.utils.Key;
 
 import io.cucumber.datatable.DataTable;
 import net.serenitybdd.core.steps.UIInteractions;
@@ -72,9 +73,12 @@ public class Staff extends UIInteractions implements Task{
 			actor.attemptsTo(SelectFromOptions.byIndex(1).from(StaffObjects.ROLE));
 			
 			waitABit(2000);
-			DataHelper.writeMemberInfo("StaffData",firstname,0);
+			DataHelper.writeStaffInfo("StaffData",firstname,1,0);
+			
 			waitABit(1000);
-						
+			DataHelper.writeStaffInfo("StaffData",lastname,2,0);
+			
+			waitABit(1000);
 			actor.attemptsTo(Click.on(OrganizationPage.SAVE_BTN));
 			waitABit(2000);
 			break;
@@ -126,6 +130,24 @@ public class Staff extends UIInteractions implements Task{
 			actor.attemptsTo(Click.on(OrganizationPage.DELETE_BTN));
 			waitABit(3000);
 
+			break;
+			
+		case "DelStaffMsg":
+			waitABit(6000);
+			actor.attemptsTo(Enter.keyValues(DataHelper.getRecord("OrgData", 1, 0)).into(OrganizationPage.ORG_SEARCH_INPUT));
+			
+			waitABit(2000);
+		    actor.attemptsTo(Click.on(OrganizationPage.ORG_NAME_LINK));
+		    
+		    actor.attemptsTo(Click.on(StaffObjects.STAFF_TAB));
+			waitABit(2000);
+			
+			actor.attemptsTo(Click.on(OrganizationPage.THREE_DOT_ICON));
+			waitABit(2000);
+			
+			actor.attemptsTo(Click.on(OrganizationPage.DELETE));
+			waitABit(2000);
+			
 			break;
 		default:
 			System.out.println("No action");

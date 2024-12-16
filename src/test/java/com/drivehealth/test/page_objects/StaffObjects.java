@@ -19,4 +19,6 @@ public class StaffObjects extends PageObject {
 
 	public static Target ROLE = Target.the("role").locatedBy("//select[@name='role_id']");
 
+	public static Target STAFF_CONFIRMATION_MSG = Target.the("confirm msg").locatedBy("//p[@class='text-lg pb-3 text-gray-900']");
+
 }

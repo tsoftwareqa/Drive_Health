@@ -45,7 +45,7 @@ Feature: Manage crud operations for organization and sub organization
         | VerifyPagination |
     Then verify pagination by navigating to next page
     
-@SmokeTest1
+@SmokeTest
   Scenario: verify download members on member tab
     Given user is on Home page of application and login
     When navigate to member tab and click on download csv button
@@ -99,13 +99,21 @@ Feature: Manage crud operations for organization and sub organization
         | Edit   |
     Then verify updated member in organization
         
-@SmokeTest
+@SmokeTest1
   Scenario: verify add staff and save
     Given user is on Home page of application and login
     When click on add staff button fill details and save
         | Action |
         | Add    |
     Then verify added staff in organization
+    
+@SmokeTest1
+  Scenario: verify delete staff confirmation message
+    Given user is on Home page of application and login
+    When perform delete staff action
+        | Action      |
+        | DelStaffMsg |
+    Then verify delete staff confirmation message
 
 @SmokeTest
   Scenario: verify edit staff and save

@@ -15,6 +15,8 @@ import com.drivehealth.test.tasks.ui.drivehealth.Settings;
 import com.drivehealth.test.tasks.ui.drivehealth.Staff;
 import com.drivehealth.test.utils.CommonUtil;
 import com.drivehealth.test.utils.DataHelper;
+import com.drivehealth.test.utils.Key;
+
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
@@ -201,7 +203,6 @@ public class DriveHealthSteps extends UIInteractionSteps {
 		CommonUtil.captureScreenshot(getDriver());
 		waitABit(2000);
 		givenThat(user).attemptsTo(Ensure.that(searchData).isEqualToIgnoringCase("No results Found."));
-
 	}
 
 	@When("click on three dot icon and delete staff")
@@ -209,6 +210,23 @@ public class DriveHealthSteps extends UIInteractionSteps {
 	@When("click on add staff button fill details and save")
 	public void click_on_add_staff_button_fill_details_and_save(DataTable staffdata) {
 		givenThat(user).attemptsTo(Staff.fromUnderlineDetails(staffdata));
+	}
+	
+	@When("perform delete staff action")
+	public void perform_delete_staff_action(DataTable staffdata) {
+		givenThat(user).attemptsTo(Staff.fromUnderlineDetails(staffdata));
+	}
+	
+	@Then("verify delete staff confirmation message")
+	public void verify_delete_staff_confirmation_message() {
+		String StaffFirstName = DataHelper.getRecord("StaffData", 1, 0);
+		System.out.println(StaffFirstName);
+		String StaffLastName = DataHelper.getRecord("StaffData", 2, 0);
+		String expectedconfirmsg = StaffObjects.STAFF_CONFIRMATION_MSG.resolveFor(user).getText();
+		String actualconfirmsg = "Are you sure you want to delete "+StaffFirstName +" "+StaffLastName+"?";
+		CommonUtil.captureScreenshot(getDriver());
+		waitABit(2000);
+		givenThat(user).attemptsTo(Ensure.that(expectedconfirmsg).isEqualToIgnoringCase(actualconfirmsg));
 	}
 
 	@Then("verify deleted staff")
