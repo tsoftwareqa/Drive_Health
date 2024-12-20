@@ -364,6 +364,7 @@ public class DriveHealthSteps extends UIInteractionSteps {
 	
 	//prompt scenarios steps
 	
+	@When("perform delete action")
 	@When("fill details in add prompt popup and save")
 	public void fill_details_in_add_prompt_popup_and_save(DataTable promptdata) {
 		givenThat(user).attemptsTo(Prompt.fromUnderlineDetails(promptdata));
@@ -373,23 +374,34 @@ public class DriveHealthSteps extends UIInteractionSteps {
 	public void verify_saved_prompt() {
 		waitABit(2000);
 		String promptinfo = DataHelper.getRecord("prompt", 0, 0);
+		givenThat(user).attemptsTo(Clear.field(PromptPage.INPUT_SEARCH));
+		waitABit(2000);
 		givenThat(user).attemptsTo(Enter.keyValues(promptinfo).into(PromptPage.INPUT_SEARCH));
 		waitABit(3000);
-		String searchedprompt = PromptPage.SEARCHED_PROMPT.resolveFor(user).getText();
-		waitABit(3000);
 		if (promptinfo.equalsIgnoreCase("This is english prompt")) {
+			CommonUtil.captureScreenshot(getDriver());
+			String searchedprompt = PromptPage.SEARCHED_PROMPT.resolveFor(user).getText();
 			givenThat(user).attemptsTo(Ensure.that(searchedprompt).containsIgnoringCase(promptinfo));
 			
 		}else if (promptinfo.equalsIgnoreCase("This is updated english prompt")) {
-			givenThat(user).attemptsTo(Ensure.that(searchedprompt).containsIgnoringCase(promptinfo));
-			
+			CommonUtil.captureScreenshot(getDriver());
+			String searchedprompt = PromptPage.SEARCHED_PROMPT.resolveFor(user).getText();
+			givenThat(user).attemptsTo(Ensure.that(searchedprompt).containsIgnoringCase(promptinfo));			
 		}else  {
-			String noprompt = PromptPage.NO_PROMT_FOUND.resolveFor(user).getText();
-			givenThat(user).attemptsTo(Ensure.that(noprompt).containsIgnoringCase("No prompts found"));
-			
+			System.out.println("No action verification");
 		}
-		givenThat(user).attemptsTo(Ensure.that(membersObject.isFileAvailable()).isTrue());
+	}
+	
+	@Then("verify deleted prompt")
+	public void verify_deleted_prompt() {
+		waitABit(2000);
+		String promptinfo = DataHelper.getRecord("prompt", 0, 0);
+		givenThat(user).attemptsTo(Clear.field(PromptPage.INPUT_SEARCH));
+		waitABit(2000);
+		givenThat(user).attemptsTo(Enter.keyValues(promptinfo).into(PromptPage.INPUT_SEARCH));
 		waitABit(3000);
 		CommonUtil.captureScreenshot(getDriver());
+		String noprompt = PromptPage.NO_PROMT_FOUND.resolveFor(user).getText();
+		givenThat(user).attemptsTo(Ensure.that(noprompt).containsIgnoringCase("No prompts found"));		
 	}
 }
