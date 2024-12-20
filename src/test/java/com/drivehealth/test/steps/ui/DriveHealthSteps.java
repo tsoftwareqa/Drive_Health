@@ -6,11 +6,13 @@ import java.util.logging.Logger;
 import com.drivehealth.test.page_objects.HomePage;
 import com.drivehealth.test.page_objects.MembersObject;
 import com.drivehealth.test.page_objects.OrganizationPage;
+import com.drivehealth.test.page_objects.PromptPage;
 import com.drivehealth.test.page_objects.SettingsObject;
 import com.drivehealth.test.page_objects.StaffObjects;
 import com.drivehealth.test.tasks.ui.common.Login;
 import com.drivehealth.test.tasks.ui.drivehealth.Members;
 import com.drivehealth.test.tasks.ui.drivehealth.Organization;
+import com.drivehealth.test.tasks.ui.drivehealth.Prompt;
 import com.drivehealth.test.tasks.ui.drivehealth.Settings;
 import com.drivehealth.test.tasks.ui.drivehealth.Staff;
 import com.drivehealth.test.utils.CommonUtil;
@@ -358,5 +360,36 @@ public class DriveHealthSteps extends UIInteractionSteps {
 		waitABit(3000);
 		CommonUtil.captureScreenshot(getDriver());
 		givenThat(user).attemptsTo(Ensure.that(successmsg).containsIgnoringCase("Download CSV Successfully"));
+	}
+	
+	//prompt scenarios steps
+	
+	@When("fill details in add prompt popup and save")
+	public void fill_details_in_add_prompt_popup_and_save(DataTable promptdata) {
+		givenThat(user).attemptsTo(Prompt.fromUnderlineDetails(promptdata));
+	}
+	
+	@Then("verify saved prompt")
+	public void verify_saved_prompt() {
+		waitABit(2000);
+		String promptinfo = DataHelper.getRecord("prompt", 0, 0);
+		givenThat(user).attemptsTo(Enter.keyValues(promptinfo).into(PromptPage.INPUT_SEARCH));
+		waitABit(3000);
+		String searchedprompt = PromptPage.SEARCHED_PROMPT.resolveFor(user).getText();
+		waitABit(3000);
+		if (promptinfo.equalsIgnoreCase("This is english prompt")) {
+			givenThat(user).attemptsTo(Ensure.that(searchedprompt).containsIgnoringCase(promptinfo));
+			
+		}else if (promptinfo.equalsIgnoreCase("This is updated english prompt")) {
+			givenThat(user).attemptsTo(Ensure.that(searchedprompt).containsIgnoringCase(promptinfo));
+			
+		}else  {
+			String noprompt = PromptPage.NO_PROMT_FOUND.resolveFor(user).getText();
+			givenThat(user).attemptsTo(Ensure.that(noprompt).containsIgnoringCase("No prompts found"));
+			
+		}
+		givenThat(user).attemptsTo(Ensure.that(membersObject.isFileAvailable()).isTrue());
+		waitABit(3000);
+		CommonUtil.captureScreenshot(getDriver());
 	}
 }
