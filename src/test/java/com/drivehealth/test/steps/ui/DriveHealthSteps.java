@@ -9,12 +9,14 @@ import com.drivehealth.test.page_objects.OrganizationPage;
 import com.drivehealth.test.page_objects.PromptPage;
 import com.drivehealth.test.page_objects.SettingsObject;
 import com.drivehealth.test.page_objects.StaffObjects;
+import com.drivehealth.test.page_objects.SurveyPage;
 import com.drivehealth.test.tasks.ui.common.Login;
 import com.drivehealth.test.tasks.ui.drivehealth.Members;
 import com.drivehealth.test.tasks.ui.drivehealth.Organization;
 import com.drivehealth.test.tasks.ui.drivehealth.Prompt;
 import com.drivehealth.test.tasks.ui.drivehealth.Settings;
 import com.drivehealth.test.tasks.ui.drivehealth.Staff;
+import com.drivehealth.test.tasks.ui.drivehealth.Survey;
 import com.drivehealth.test.utils.CommonUtil;
 import com.drivehealth.test.utils.DataHelper;
 import com.drivehealth.test.utils.Key;
@@ -403,5 +405,29 @@ public class DriveHealthSteps extends UIInteractionSteps {
 		CommonUtil.captureScreenshot(getDriver());
 		String noprompt = PromptPage.NO_PROMT_FOUND.resolveFor(user).getText();
 		givenThat(user).attemptsTo(Ensure.that(noprompt).containsIgnoringCase("No prompts found"));		
+	}
+	
+	//Survey scenarios
+	
+	@When("perform survey delete action")
+	@When("fill details in edit survey popup and save")
+	@When("fill details in add survey popup and save")
+	public void fill_details_in_add_survey_popup_and_save(DataTable surveydata) {
+		givenThat(user).attemptsTo(Survey.fromUnderlineDetails(surveydata));
+	}
+	
+	@Then("verify deleted survey")
+	@Then("verify saved survey")
+	public void verify_saved_survey() {
+		waitABit(2000);
+		String surveyinfo = DataHelper.getRecord("survey", 0, 0);
+		String getsurvey = SurveyPage.SURVEY_LIST.resolveFor(user).getText();
+		if (getsurvey.equalsIgnoreCase("A Health Survey") || getsurvey.equalsIgnoreCase("A Updated Health Survey") ) {
+			CommonUtil.captureScreenshot(getDriver());
+			givenThat(user).attemptsTo(Ensure.that(getsurvey).containsIgnoringCase(surveyinfo));
+			
+		}else {
+			givenThat(user).attemptsTo(Ensure.that(surveyinfo).isNotEqualTo(getsurvey));
+		}
 	}
 }
