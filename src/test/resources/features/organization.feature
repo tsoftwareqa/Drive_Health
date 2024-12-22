@@ -84,13 +84,21 @@ Feature: Manage crud operations for organization and sub organization
     Then verify call status
      
 @SmokeTest
-  Scenario: verify generate report
+  Scenario: verify generate report from slide out panel
     Given user is on Home page of application and login
     When navigate to member page and generate report
         | Action    |  
         | GenReport |
     Then verify generated report for member
 
+@SmokeTest1
+  Scenario: verify generate report from org tab
+    Given user is on Home page of application and login
+    When navigate to org tab and generate report
+        | Action       |
+        | GenOrgReport |
+    Then verify generated report for org
+    
 @SmokeTest
   Scenario: verify edit member and save
     Given user is on Home page of application and login
@@ -99,7 +107,7 @@ Feature: Manage crud operations for organization and sub organization
         | Edit   |
     Then verify updated member in organization
         
-@SmokeTest1
+@SmokeTest
   Scenario: verify add staff and save
     Given user is on Home page of application and login
     When click on add staff button fill details and save
@@ -107,7 +115,7 @@ Feature: Manage crud operations for organization and sub organization
         | Add    |
     Then verify added staff in organization
     
-@SmokeTest1
+@SmokeTest
   Scenario: verify delete staff confirmation message
     Given user is on Home page of application and login
     When perform delete staff action

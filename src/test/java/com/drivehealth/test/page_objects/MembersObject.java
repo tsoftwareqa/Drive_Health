@@ -133,7 +133,9 @@ public class MembersObject extends PageObject {
                     isFileAvailable = true;
                 }else if(fileName.equalsIgnoreCase(memberfilename)) {
                 	isFileAvailable = true;
-                }
+                }else if (fileName.equalsIgnoreCase("organization_report.xlsx")) {
+                	isFileAvailable = true;
+				}
             }
         }
         return isFileAvailable;

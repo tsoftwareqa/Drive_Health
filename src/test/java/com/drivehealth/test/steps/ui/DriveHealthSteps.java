@@ -95,6 +95,7 @@ public class DriveHealthSteps extends UIInteractionSteps {
 	}
 
 	// organization steps
+	@When("navigate to org tab and generate report")
 	@When("click on sub organization button and fill details and save")
 	@When("click on organization button fill details and save")
 	@When("click on three dot icon and update details")
@@ -319,6 +320,7 @@ public class DriveHealthSteps extends UIInteractionSteps {
 		givenThat(user).attemptsTo(Ensure.that(days).isEqualTo("05"));
 	}
 
+	@Then("verify generated report for org")
 	@Then("verify generated report for member")
 	public void verify_generated_report_for_member() {
 		givenThat(user).attemptsTo(Ensure.that(membersObject.isFileAvailable()).isTrue());

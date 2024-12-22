@@ -1,6 +1,7 @@
 package com.drivehealth.test.tasks.ui.drivehealth;
 import java.util.Map;
 
+import com.drivehealth.test.page_objects.MembersObject;
 import com.drivehealth.test.page_objects.OrganizationPage;
 import com.drivehealth.test.utils.ConvertCucumberDataTable;
 import com.drivehealth.test.utils.DataHelper;
@@ -17,6 +18,7 @@ public class Organization extends UIInteractions implements Task {
 
 	private static String action;
 	OrganizationPage orgpage;
+	MembersObject membersObject;
 	
 	public Organization(String action) {
 		this.action = action;
@@ -33,6 +35,7 @@ public class Organization extends UIInteractions implements Task {
 	public <T extends Actor> void performAs(T actor) {
 	
 		String orgname="";
+		String orgName = DataHelper.getRecord("OrgData", 1, 0);
 		
 		switch(action){
 			case "Add":
@@ -167,6 +170,26 @@ public class Organization extends UIInteractions implements Task {
 				
 				actor.attemptsTo(Click.on(OrganizationPage.DELETE_BTN));
 				waitABit(3000);
+				
+				break;
+				
+            case "GenOrgReport":
+
+            	waitABit(6000);
+            	actor.attemptsTo(Enter.keyValues(orgName).into(OrganizationPage.ORG_SEARCH_INPUT));
+    			waitABit(2000);
+    			
+    		    actor.attemptsTo(Click.on(OrganizationPage.ORG_NAME_LINK));
+    		    waitABit(2000);
+    		    
+    		    actor.attemptsTo(Click.on(MembersObject.GEN_REPORT_BTN));
+    		    waitABit(2000);
+    		    
+    		    orgpage.deleteFile();
+    		    waitABit(3000);
+    		    
+    		    actor.attemptsTo(Click.on(MembersObject.GENERATE_REPORT_BTN));
+    		    waitABit(5000);
 				
 				break;
 			default:

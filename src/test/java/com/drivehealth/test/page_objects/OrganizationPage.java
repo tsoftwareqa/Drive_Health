@@ -72,12 +72,13 @@ public class OrganizationPage extends PageObject {
 		 element.get(element.size()-1).click();
    }
 	
-	  public static void main(String args[]) {
-		  
-		  String file = System.getProperty("user.dir");
-	    	file.replaceAll("\\\\","\\\\");
-		         
-		   
-	  }
+	public void deleteFile() {
+		File myObj = new File("C:\\Users\\Admin\\Downloads\\organization_report.xlsx"); 
+	    if (myObj.delete()) { 
+	      System.out.println("file deleted successfully: " + myObj.getName());
+	    } else {
+	      System.out.println("Failed to delete the file.");
+	    }
+	}
 	 
 }
