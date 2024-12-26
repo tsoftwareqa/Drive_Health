@@ -1,5 +1,7 @@
 package com.drivehealth.test.page_objects;
 
+import java.util.Random;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -55,6 +57,8 @@ public class SettingsObject extends PageObject {
 
 	public static Target TO_AM_PM = Target.the("am pm").locatedBy("(//select[@name='amPm'])[2]");
 
+	public static Target SESSION_TIMEOUT = Target.the("session timeout").locatedBy("//input[@id='timeout_duration']");
+
 	public void clearInitialCallField() {
 		WebElement ele1 = getDriver().findElement(By.xpath("(//input[@id='before_start'])[1]"));
 		String s = Keys.chord(Keys.CONTROL, "a");
@@ -81,6 +85,20 @@ public class SettingsObject extends PageObject {
 		String s = Keys.chord(Keys.CONTROL, "a");
 		ele4.sendKeys(s);
 		ele4.sendKeys(Keys.DELETE);
+	}
+	
+	public void clearSessionField() {
+		WebElement ele4 = getDriver().findElement(By.xpath("//input[@id='timeout_duration']"));
+		String s = Keys.chord(Keys.CONTROL, "a");
+		ele4.sendKeys(s);
+		ele4.sendKeys(Keys.DELETE);
+	}
+	
+	public static String generateSessionValue() {
+        Random random = new Random();
+        int randomNumber = random.nextInt(12) + 1;
+        String result = Integer.toString(randomNumber * 5);    
+        return result;
 	}
 
 }

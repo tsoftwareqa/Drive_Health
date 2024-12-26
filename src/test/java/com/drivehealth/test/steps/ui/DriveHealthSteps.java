@@ -302,6 +302,7 @@ public class DriveHealthSteps extends UIInteractionSteps {
 		givenThat(user).attemptsTo(Click.on(SettingsObject.SETTINGS));
 	}
 
+	@When("fill session timeout value and save")
 	@When("fill details for time window workflow call and save")
 	public void fill_details_for_time_window_workflow_call_and_save(DataTable setting) {
 		givenThat(user).attemptsTo(Settings.fromUnderlineDetails(setting));
@@ -318,6 +319,14 @@ public class DriveHealthSteps extends UIInteractionSteps {
 		givenThat(user).attemptsTo(Ensure.that(retryCall).isEqualTo("01"));
 		givenThat(user).attemptsTo(Ensure.that(hours).isEqualTo("03"));
 		givenThat(user).attemptsTo(Ensure.that(days).isEqualTo("05"));
+	}
+	
+	@Then("verify saved session settings")
+	public void verify_saved_session_settings() {
+		waitABit(2000);
+		String sessionval = SettingsObject.SESSION_TIMEOUT.resolveFor(user).getAttribute("value");
+		String sessiontime = givenThat(user).recall(Key.SESSIONVAL);
+		givenThat(user).attemptsTo(Ensure.that(sessionval).isEqualTo(sessiontime));
 	}
 
 	@Then("verify generated report for org")

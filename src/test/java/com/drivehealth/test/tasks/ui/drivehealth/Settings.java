@@ -8,6 +8,8 @@ import com.drivehealth.test.page_objects.MembersObject;
 import com.drivehealth.test.page_objects.OrganizationPage;
 import com.drivehealth.test.page_objects.SettingsObject;
 import com.drivehealth.test.utils.ConvertCucumberDataTable;
+import com.drivehealth.test.utils.Key;
+
 import io.cucumber.datatable.DataTable;
 import net.serenitybdd.core.steps.UIInteractions;
 import net.serenitybdd.screenplay.Actor;
@@ -83,8 +85,18 @@ public class Settings extends UIInteractions implements Task {
 			waitABit(2000);
 			
 			break;
-		case "Reset":
-
+		case "SaveSession":		
+			waitABit(3000);
+			actor.attemptsTo(Click.on(SettingsObject.ORG_NAME));
+			waitABit(2000);
+			String sessionval = SettingsObject.generateSessionValue();
+			setobj.clearSessionField();
+			waitABit(2000);
+			actor.attemptsTo(Enter.keyValues(sessionval).into(SettingsObject.SESSION_TIMEOUT));
+			actor.remember(Key.SESSIONVAL, sessionval);
+			waitABit(2000);
+			actor.attemptsTo(Click.on(SettingsObject.TIME_WIN_SAVE_BTN));
+			
 			break;
 		default:
 			System.out.println("No action");
