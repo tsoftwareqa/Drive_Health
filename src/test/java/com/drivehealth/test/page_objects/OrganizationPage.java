@@ -64,21 +64,11 @@ public class OrganizationPage extends PageObject {
 		return findAll(ALL_ORG).stream().map(WebElementFacade::getText).collect(Collectors.toList());
 	}
 
-	
 	public void getElement() {
 		List<WebElement> element =  getDriver().findElements(By.xpath("//div[@data-state='closed']/child::button"));
 		((JavascriptExecutor) getDriver()).executeScript(
 	            "document.querySelector(\"div[class='h-full w-full rounded-[inherit]']\").scrollTop=20000");
 		 element.get(element.size()-1).click();
    }
-	
-	public void deleteFile() {
-		File myObj = new File("C:\\Users\\Admin\\Downloads\\organization_report.xlsx"); 
-	    if (myObj.delete()) { 
-	      System.out.println("file deleted successfully: " + myObj.getName());
-	    } else {
-	      System.out.println("Failed to delete the file.");
-	    }
-	}
-	 
+
 }

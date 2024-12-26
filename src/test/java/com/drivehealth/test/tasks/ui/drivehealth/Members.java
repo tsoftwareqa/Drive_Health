@@ -335,7 +335,7 @@ public class Members extends UIInteractions implements Task {
 		    actor.attemptsTo(Click.on(MembersObject.GEN_REPORT_BTN));
 		    waitABit(2000);
 		    
-		    membersObject.deleteFile();
+		    CommonUtil.deleteFile();
 		    waitABit(3000);
 		    
 		    actor.attemptsTo(Click.on(MembersObject.GENERATE_REPORT_BTN));
@@ -375,6 +375,8 @@ public class Members extends UIInteractions implements Task {
 		    
 		    actor.attemptsTo(Click.on(MembersObject.MEMBERS_TAB));
 		    waitABit(2000);
+		    
+		    CommonUtil.deleteFile();
 		    
 		    actor.attemptsTo(Click.on(MembersObject.DOWNLOAD_CSV));
 		    waitABit(2000);

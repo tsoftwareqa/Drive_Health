@@ -84,7 +84,7 @@ public class CommonUtil {
 
 		return id;
 	}
-	
+
 	public static Integer generateRandomNumber() {
 		Random rand = new Random();
 		int id = rand.nextInt(10000);
@@ -106,9 +106,9 @@ public class CommonUtil {
 
 			if (date1.after(date2)) {
 				return true;
-			}else if (date1.before(date2)) {
+			} else if (date1.before(date2)) {
 				return true;
-			}else {
+			} else {
 				return true;
 			}
 
@@ -119,23 +119,24 @@ public class CommonUtil {
 	}
 
 	public static String getCurrentDateTime() {
-		SimpleDateFormat customformat=new SimpleDateFormat("dd_MM_yy_HH_mm_ss");
-		Date currentDate=new Date();
+		SimpleDateFormat customformat = new SimpleDateFormat("dd_MM_yy_HH_mm_ss");
+		Date currentDate = new Date();
 		return customformat.format(currentDate);
 	}
-	
+
 	public static String captureScreenshot(WebDriver driver) {
-		File src=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		String screenshotpath=System.getProperty("user.dir")+"/src/test/resources/screenshots/"+getCurrentDateTime()+ ".png";
+		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		String screenshotpath = System.getProperty("user.dir") + "/src/test/resources/screenshots/"
+				+ getCurrentDateTime() + ".png";
 		try {
 			FileHandler.copy(src, new File(screenshotpath));
 			System.out.println("Screenshot captured successfully");
 		} catch (IOException e) {
-			System.out.println("Unable to capture screenshot"+e.getMessage());
+			System.out.println("Unable to capture screenshot" + e.getMessage());
 		}
-       return screenshotpath;
+		return screenshotpath;
 	}
-	
+
 	public static String generateRandomString() {
 
 		final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -151,81 +152,112 @@ public class CommonUtil {
 		}
 		return sb.toString();
 	}
-	
+
 	public static void writeAtPosition(String filePath, int rowNum, int colNum, String newData) throws IOException {
-        // Step 1: Read the existing CSV into memory
-        List<String[]> rows = new ArrayList<>();
-        
-        try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
-            String[] row;
-            try {
+		// Step 1: Read the existing CSV into memory
+		List<String[]> rows = new ArrayList<>();
+
+		try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
+			String[] row;
+			try {
 				while ((row = reader.readNext()) != null) {
-				    rows.add(row);
+					rows.add(row);
 				}
 			} catch (CsvValidationException | IOException e) {
 				e.printStackTrace();
 			}
-        }
+		}
 
-        // Step 2: Check if the row and column positions are valid
-        if (rowNum >= rows.size() || rowNum < 0) {
-            throw new IllegalArgumentException("Row number is out of range.");
-        }
-        String[] targetRow = rows.get(rowNum);
-        if (colNum >= targetRow.length || colNum < 0) {
-            throw new IllegalArgumentException("Column number is out of range.");
-        }
+		// Step 2: Check if the row and column positions are valid
+		if (rowNum >= rows.size() || rowNum < 0) {
+			throw new IllegalArgumentException("Row number is out of range.");
+		}
+		String[] targetRow = rows.get(rowNum);
+		if (colNum >= targetRow.length || colNum < 0) {
+			throw new IllegalArgumentException("Column number is out of range.");
+		}
 
-        // Step 3: Modify the specific cell with the new data
-        targetRow[colNum] = newData;
+		// Step 3: Modify the specific cell with the new data
+		targetRow[colNum] = newData;
 
-        // Step 4: Write the updated data back to the CSV file
-        try (CSVWriter writer = new CSVWriter(new FileWriter(filePath))) {
-            writer.writeAll(rows);
-        }
-    }
-	
+		// Step 4: Write the updated data back to the CSV file
+		try (CSVWriter writer = new CSVWriter(new FileWriter(filePath))) {
+			writer.writeAll(rows);
+		}
+	}
+
 	// Method to update all rows in a specific column
-    public static void updateColumn(String filePath, int colNum, String newData) throws IOException {
-        // Step 1: Read the existing CSV into memory
-        List<List<String>> rows = new ArrayList<>();
-        
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] columns = line.split(",");
-                rows.add(new ArrayList<>(Arrays.asList(columns)));
-            }
-        }
+	public static void updateColumn(String filePath, int colNum, String newData) throws IOException {
+		// Step 1: Read the existing CSV into memory
+		List<List<String>> rows = new ArrayList<>();
 
-        // Step 2: Check if the column number is valid
-        if (colNum < 0 || colNum >= rows.get(0).size()) {
-            throw new IllegalArgumentException("Column number is out of range.");
-        }
+		try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+			String line;
+			while ((line = br.readLine()) != null) {
+				String[] columns = line.split(",");
+				rows.add(new ArrayList<>(Arrays.asList(columns)));
+			}
+		}
 
-       // Step 3: Update the specified column in all rows except the first (header)
-        for (int i = 1; i < rows.size(); i++) {  // Start from row 1 to skip the header (row 0)
-            List<String> row = rows.get(i);
-            row.set(colNum, newData.concat(","));  // Update the column with new data
-        }
+		// Step 2: Check if the column number is valid
+		if (colNum < 0 || colNum >= rows.get(0).size()) {
+			throw new IllegalArgumentException("Column number is out of range.");
+		}
 
-        // Step 4: Write the updated data back to the CSV file
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
-            for (int i = 0; i < rows.size(); i++) {
-                String rowString = String.join(",", rows.get(i));
-                bw.write(rowString);
-                // Avoid adding an extra line at the end
-                if (i < rows.size() - 1) {
-                    bw.newLine(); // Add a new line after every row except the last one
-                }
-            }
-        }
-    }
-	
-	
-	  public static void main(String[] args) { 
-		  System.out.println(CommonUtil.getCurrentDate());
-	  }
-	 
+		// Step 3: Update the specified column in all rows except the first (header)
+		for (int i = 1; i < rows.size(); i++) { // Start from row 1 to skip the header (row 0)
+			List<String> row = rows.get(i);
+			row.set(colNum, newData.concat(",")); // Update the column with new data
+		}
 
+		// Step 4: Write the updated data back to the CSV file
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+			for (int i = 0; i < rows.size(); i++) {
+				String rowString = String.join(",", rows.get(i));
+				bw.write(rowString);
+				// Avoid adding an extra line at the end
+				if (i < rows.size() - 1) {
+					bw.newLine(); // Add a new line after every row except the last one
+				}
+			}
+		}
+	}
+
+	public static boolean isFileAvailable() {
+		File folder = new File("C:\\workspace\\Drive_Health\\src\\test\\resources\\downloads");
+		File[] listOfFiles = folder.listFiles();
+		String memberfilename = "Organisation_Members_List_" + CommonUtil.getCurrentDate() + ".csv";
+		boolean isFileAvailable = false;
+		for (File listOfFile : listOfFiles) {
+			if (listOfFile.isFile()) {
+				String fileName = listOfFile.getName();
+				if (fileName.equalsIgnoreCase("interaction_report.pdf")) {
+					isFileAvailable = true;
+				} else if (fileName.equalsIgnoreCase(memberfilename)) {
+					isFileAvailable = true;
+				} else if (fileName.equalsIgnoreCase("organization_report.xlsx")) {
+					isFileAvailable = true;
+				}
+			}
+		}
+		return isFileAvailable;
+	}
+
+	public static void deleteFile() {
+		File folder = new File("C:\\workspace\\Drive_Health\\src\\test\\resources\\downloads");
+		File[] listOfFiles = folder.listFiles();
+		String memberfilename = "Organisation_Members_List_" + CommonUtil.getCurrentDate();
+		for (File listOfFile : listOfFiles) {
+			if (listOfFile.isFile()) {
+				String fileName = listOfFile.getName();
+				if (fileName.equalsIgnoreCase("interaction_report.pdf") || fileName.startsWith(memberfilename)
+						|| fileName.equalsIgnoreCase("organization_report.xlsx")) {
+					listOfFile.delete();
+				} else {
+					System.out.println("No file present!");
+				}
+			}
+		}
+
+	}
 }

@@ -332,7 +332,7 @@ public class DriveHealthSteps extends UIInteractionSteps {
 	@Then("verify generated report for org")
 	@Then("verify generated report for member")
 	public void verify_generated_report_for_member() {
-		givenThat(user).attemptsTo(Ensure.that(membersObject.isFileAvailable()).isTrue());
+		givenThat(user).attemptsTo(Ensure.that(CommonUtil.isFileAvailable()).isTrue());
 	}
 
 	@Then("verify call status")
@@ -369,7 +369,7 @@ public class DriveHealthSteps extends UIInteractionSteps {
 		waitABit(2000);
 		String successmsg = MembersObject.SUCCESS_POPUP.resolveFor(user).getText();
 		waitABit(3000);
-		givenThat(user).attemptsTo(Ensure.that(membersObject.isFileAvailable()).isTrue());
+		givenThat(user).attemptsTo(Ensure.that(CommonUtil.isFileAvailable()).isTrue());
 		waitABit(3000);
 		CommonUtil.captureScreenshot(getDriver());
 		givenThat(user).attemptsTo(Ensure.that(successmsg).containsIgnoringCase("Download CSV Successfully"));

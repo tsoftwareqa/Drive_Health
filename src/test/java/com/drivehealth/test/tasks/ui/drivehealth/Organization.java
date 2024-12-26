@@ -3,6 +3,7 @@ import java.util.Map;
 
 import com.drivehealth.test.page_objects.MembersObject;
 import com.drivehealth.test.page_objects.OrganizationPage;
+import com.drivehealth.test.utils.CommonUtil;
 import com.drivehealth.test.utils.ConvertCucumberDataTable;
 import com.drivehealth.test.utils.DataHelper;
 import com.drivehealth.test.utils.Key;
@@ -185,7 +186,7 @@ public class Organization extends UIInteractions implements Task {
     		    actor.attemptsTo(Click.on(MembersObject.GEN_REPORT_BTN));
     		    waitABit(2000);
     		    
-    		    orgpage.deleteFile();
+    		    CommonUtil.deleteFile();
     		    waitABit(3000);
     		    
     		    actor.attemptsTo(Click.on(MembersObject.GENERATE_REPORT_BTN));

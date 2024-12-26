@@ -111,42 +111,5 @@ public class MembersObject extends PageObject {
 		List<WebElement> element =  getDriver().findElements(By.xpath("//ul[@class='w-full']/descendant::span"));
 		element.get(1).click();
    }
-	
-	public void downloadTest() throws InterruptedException {
-        ChromeOptions options = new ChromeOptions();
-        Map<String, Object> prefs = new HashMap<>();
-        prefs.put("download.default_directory", System.getProperty("user.dir")+"/src/test/resources/downloads");
-        options.setExperimentalOption("prefs", prefs);
-        getDriver();
-     }
-	
-	public boolean isFileAvailable(){
-        File folder = new File("C:\\Users\\Admin\\Downloads");
-        File[] listOfFiles = folder.listFiles();
-        String memberfilename = "Organisation_Members_List_"+CommonUtil.getCurrentDate();
-        boolean isFileAvailable = false;
-        for (File listOfFile : listOfFiles) {
-            if (listOfFile.isFile()) {
-                String fileName = listOfFile.getName();
-                System.out.println("File " + fileName);
-                if (fileName.equalsIgnoreCase("interaction_report.pdf")) {
-                    isFileAvailable = true;
-                }else if(fileName.equalsIgnoreCase(memberfilename)) {
-                	isFileAvailable = true;
-                }else if (fileName.equalsIgnoreCase("organization_report.xlsx")) {
-                	isFileAvailable = true;
-				}
-            }
-        }
-        return isFileAvailable;
-    }
-	
-	public void deleteFile() {
-		File myObj = new File("C:\\Users\\Admin\\Downloads\\interaction_report.pdf"); 
-	    if (myObj.delete()) { 
-	      System.out.println("file deleted successfully: " + myObj.getName());
-	    } else {
-	      System.out.println("Failed to delete the file.");
-	    }
-	}
+		
 }
